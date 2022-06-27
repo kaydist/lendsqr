@@ -1,0 +1,12 @@
+.btn {
+  @include flex($align: center, $justify: center);
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+
+  &:hover {
+    transition: all 0.3s ease-in-out;
+  }
+}
