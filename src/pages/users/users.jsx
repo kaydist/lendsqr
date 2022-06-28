@@ -13,7 +13,9 @@ export default function Users() {
   return (
     <InAppLayout>
       <div className="page-content user-page">
-        <h1 className="page-title">Users</h1>
+        <div className="page-heading">
+          <h1 className="page-title">Users</h1>
+        </div>
 
         <div className="analytics-card-row">
           {[

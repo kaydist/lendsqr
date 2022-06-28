@@ -1,0 +1,13 @@
+@use "/src/styles/index.scss" as v;
+
+.back-button {
+  @include v.flex($align: center, $justify: space-between);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  color: v.$col-grey-500;
+
+  .icon {
+    @include v.flex($align: center, $justify: center);
+    width: 1.875rem;
+  }
+}

@@ -1,0 +1,21 @@
+@use "/src/styles/index.scss" as v;
+
+.user-details-page {
+  .page-heading {
+    @include v.flex($align: center, $justify: space-between);
+
+    .button-row {
+      @include v.flex($align: center, $justify: center);
+      gap: 1.25rem;
+
+      .blacklist-btn {
+        border-color: v.$danger;
+        color: v.$danger;
+        &:hover {
+          background-color: v.$danger;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
