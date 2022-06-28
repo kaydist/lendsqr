@@ -38,10 +38,6 @@ export default function Topbar() {
             <u>Docs</u>
           </div>
 
-          <div className="icon search">
-            <SearchIcon />
-          </div>
-
           <div className="icon notification">
             <NotificationIcon />
           </div>
