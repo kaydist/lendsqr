@@ -20,9 +20,9 @@
       margin-right: 1rem;
       background: none;
       color: v.$text-color;
-      @include v.flex($align: center);
-      @include v.media(">tablet") {
-        display: none;
+      display: none;
+      @include v.media("<desktop") {
+        @include v.flex($align: center);
       }
     }
 
