@@ -1,11 +1,14 @@
 import React from "react";
+import Sidebar from "./common/sidebar";
 import Topbar from "./common/topbar";
 
 export default function InAppLayout({ image, children }) {
   return (
-    <div>
+    <div className="in-app-layout">
       <Topbar />
-      <div>{children}</div>
+      <Sidebar />
+
+      <div className="main-content">{children}</div>
     </div>
   );
 }

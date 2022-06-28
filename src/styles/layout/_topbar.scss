@@ -1,12 +1,14 @@
 .topbar {
   @include flex($align: center);
   width: 100%;
+  height: $topbar-height;
   padding: 1.875rem 0;
+  background-color: #fff;
   box-shadow: 3px 0px 20px 0px #0000000a;
 
   .logo-container {
-    width: 17.6875rem;
-    padding: 0 1.875rem;
+    width: $sidebar-width;
+    padding: 0 $sidebar-padding;
     @include flex($align: center);
 
     .logo {
@@ -28,7 +30,7 @@
         padding: 0 1.2rem;
         width: 21.6rem;
       }
-      
+
       .icon {
         background-color: $primary-color;
         padding: 0.75rem 1.2rem;

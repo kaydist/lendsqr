@@ -1,3 +1,4 @@
+$col-grey-100: #fbfbfb;
 $col-grey-500: #545f7d;
 $col-blue-500: #5718ff;
 $col-blue-800: #213f7d;
@@ -8,12 +9,21 @@ $col-cyan-400: #39cdcc;
 $col-orange-400: #f55f44;
 $col-red-600: #ff3366;
 $col-red-800: #e4033b;
-$col-grey-100: #fbfbfb;
 
 $primary-color: $col-cyan-400;
+$body-bg: $col-grey-100;
 
 $body-padding: 3.75rem;
 
 // roundness
 $input-radius: 0.5rem;
 $rounded-full: 9999px;
+
+//layout
+$topbar-height: 6.25rem;
+$sidebar-width: 17.6875rem;
+$sidebar-padding: 1.875rem;
+
+//z-index
+$sidebar-index: 10;
+$topbar-index: 11;
