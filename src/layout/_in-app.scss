@@ -26,11 +26,12 @@
   }
 
   .main-content {
-    @include v.media(">tablet") {
-      margin-left: v.$sidebar-width;
-    }
-    padding-top: v.$topbar-height;
+    padding: (v.$topbar-height + v.$body-padding) v.$sidebar-padding;
     background-color: v.$body-bg;
     min-height: 100vh;
+    @include v.media(">tablet") {
+      margin-left: v.$sidebar-width;
+      padding: (v.$topbar-height + v.$body-padding) v.$body-padding;
+    }
   }
 }

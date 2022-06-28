@@ -1,0 +1,34 @@
+@use "/src/styles/index.scss" as v;
+
+.user-page {
+  .analytics-card-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    @include v.media("<desktop") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include v.media("<tablet") {
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    gap: 1.625rem;
+
+    .analytics-card {
+      @include v.flex();
+      flex-direction: column;
+
+      .label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-top: 0.75rem;
+        text-transform: uppercase;
+      }
+
+      .value {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-top: 0.875rem;
+        line-height: 1.17em;
+      }
+    }
+  }
+}

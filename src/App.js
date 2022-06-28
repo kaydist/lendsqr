@@ -3,7 +3,7 @@ import "./styles/index.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/login/login";
 import DashboardPage from "./pages/dashboard/dashboard";
-import UsersPage from "./pages/user/user";
+import UsersPage from "./pages/users";
 
 function App() {
   return (

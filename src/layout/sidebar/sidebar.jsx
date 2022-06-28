@@ -2,7 +2,6 @@ import React from "react";
 import "./_sidebar.scss";
 import { Link, useLocation } from "react-router-dom";
 
-
 //icons
 import { ReactComponent as SwitchOrganizationIcon } from "../../assets/icons/briefcase.svg";
 import { ReactComponent as DropdownOutlinedIcon } from "../../assets/icons/dropdown-outlined.svg";
@@ -44,22 +43,53 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="switch-organization">
-      <NavComponent
-        icon={<SwitchOrganizationIcon />}
-        title="Switch Organization"
-        dropdown={true}
-      />
+        <NavComponent
+          icon={<SwitchOrganizationIcon />}
+          title="Switch Organization"
+          dropdown={true}
+        />
       </div>
 
-      <NavComponent
-        icon={<HomeIcon />}
-        title="Dashboard"
-        link={`/dashboard`}
-      />
+      <NavComponent icon={<HomeIcon />} title="Dashboard" link={`/dashboard`} />
 
       <div>
         <NavGroup title="Customers">
           {[
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
+            {
+              link: "/users",
+              title: "Users",
+              icon: <UsersIcon />,
+            },
             {
               link: "/users",
               title: "Users",
@@ -79,6 +109,16 @@ export default function Sidebar() {
 
         <NavGroup title="Businesses">
           {[
+            {
+              link: "/organization",
+              title: "Organization",
+              icon: <SwitchOrganizationIcon />,
+            },
+            {
+              link: "/organization",
+              title: "Organization",
+              icon: <SwitchOrganizationIcon />,
+            },
             {
               link: "/organization",
               title: "Organization",
