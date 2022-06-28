@@ -1,7 +1,10 @@
-import React from 'react'
+import React from "react";
+import InAppLayout from "../layout/inAppLayout";
 
 export default function DashboardPage() {
   return (
-    <div>Dashboard</div>
-  )
+    <InAppLayout>
+      <div>Dashboard</div>
+    </InAppLayout>
+  );
 }

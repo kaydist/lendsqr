@@ -8,7 +8,12 @@ $col-cyan-400: #39cdcc;
 $col-orange-400: #f55f44;
 $col-red-600: #ff3366;
 $col-red-800: #e4033b;
-$col-grey-100: #FBFBFB;
-
+$col-grey-100: #fbfbfb;
 
 $primary-color: $col-cyan-400;
+
+$body-padding: 3.75rem;
+
+// roundness
+$input-radius: 0.5rem;
+$rounded-full: 9999px;

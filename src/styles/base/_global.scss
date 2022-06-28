@@ -7,21 +7,14 @@
 html {
   font-size: 14px;
 
-  @include media(">phone") {
-    font-size: 12px;
-  }
-
   @include media(">tablet") {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   @include media(">desktop") {
     font-size: 16px;
   }
 
-  @include media(">LGdesktop") {
-    font-size: 18px;
-  }
 
   @include media(">XLdesktop") {
     font-size: 20px;
@@ -50,6 +43,11 @@ p {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+button {
+  border: 0;
+  outline: 0;
 }
 
 button,

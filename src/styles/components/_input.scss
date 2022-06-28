@@ -3,7 +3,7 @@
   font-size: 0.875rem;
   border: 1px solid;
   border-color: rgba($col-grey-500, 15%);
-  border-radius: 0.5rem;
+  border-radius: $input-radius;
   @include flex($align: center);
 
   &:focus-within {
@@ -13,9 +13,10 @@
   input {
     width: 100%;
     padding: 1rem 1.01rem;
-    border-radius: 0.5rem;
+    border-radius: $input-radius;
     border: 0;
     outline: 0;
+    font-size: inherit;
 
     &:active,
     :focus {

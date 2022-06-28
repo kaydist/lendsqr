@@ -23,6 +23,7 @@
 
     .logo {
       padding-left: 2rem;
+      width: 10.875rem;
     }
 
     .illustration-container {
@@ -56,18 +57,19 @@
     .form-section {
       width: 100%;
       @include media("<desktop") {
-        max-width: 300px;
+        max-width: 350px;
         margin: 0 auto;
       }
+
       @include flex($align: flex-start, $justify: center);
       flex-direction: column;
 
       .logo {
         display: none;
-        width: 100%;
         @include media("<desktop") {
-          @include flex($align: center, $justify: center);
-          margin-bottom: 5rem;
+          display: block;
+          width: 10.875rem;
+          margin: 0 auto 5rem;
         }
       }
 
