@@ -1,5 +1,7 @@
+@use "/src/styles/mixins/layout.scss" as v;
+
 .btn {
-  @include flex($align: center, $justify: center);
+  @include v.flex($align: center, $justify: center);
   gap: 0.5rem;
   font-size: 0.875rem;
   padding: 1rem;

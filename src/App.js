@@ -1,9 +1,9 @@
 import React from "react";
 import "./styles/index.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/login";
-import DashboardPage from "./pages/dashboard";
-import UsersPage from "./pages/user";
+import LoginPage from "./pages/login/login";
+import DashboardPage from "./pages/dashboard/dashboard";
+import UsersPage from "./pages/user/user";
 
 function App() {
   return (

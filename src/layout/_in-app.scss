@@ -1,3 +1,5 @@
+@use "../styles/index.scss" as v;
+
 .in-app-layout {
   min-height: 100vh;
   width: 100%;
@@ -5,16 +7,16 @@
   .topbar {
     position: fixed;
     top: 0;
-    z-index: $topbar-index;
+    z-index: v.$topbar-index;
   }
   .sidebar {
     position: fixed;
-    top: $topbar-height;
+    top: v.$topbar-height;
     left: 0;
-    z-index: $sidebar-index;
+    z-index: v.$sidebar-index;
     transition: all 0.2s ease-in-out;
 
-    @include media("<desktop") {
+    @include v.media("<desktop") {
       left: -100%;
     }
 
@@ -24,11 +26,11 @@
   }
 
   .main-content {
-    @include media(">tablet") {
-      margin-left: $sidebar-width;
+    @include v.media(">tablet") {
+      margin-left: v.$sidebar-width;
     }
-    padding-top: $topbar-height;
-    background-color: $body-bg;
+    padding-top: v.$topbar-height;
+    background-color: v.$body-bg;
     min-height: 100vh;
   }
 }

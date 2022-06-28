@@ -1,6 +1,7 @@
 import React from "react";
-import Sidebar from "./common/sidebar";
-import Topbar from "./common/topbar";
+import "./_in-app.scss";
+import Sidebar from "./sidebar/sidebar";
+import Topbar from "./topbar/topbar";
 
 export default function InAppLayout({ image, children }) {
   return (

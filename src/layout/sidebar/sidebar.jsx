@@ -1,5 +1,9 @@
 import React from "react";
+import "./_sidebar.scss";
 import { Link, useLocation } from "react-router-dom";
+
+
+//icons
 import { ReactComponent as SwitchOrganizationIcon } from "../../assets/icons/briefcase.svg";
 import { ReactComponent as DropdownOutlinedIcon } from "../../assets/icons/dropdown-outlined.svg";
 import { ReactComponent as UsersIcon } from "../../assets/icons/users.svg";

@@ -1,42 +1,44 @@
+@use "../../styles/index.scss" as v;
+
 .topbar {
   display: grid;
-  grid-template-columns: $sidebar-width 1fr;
+  grid-template-columns: v.$sidebar-width 1fr;
   place-content: center;
   width: 100%;
-  height: $topbar-height;
+  height: v.$topbar-height;
   padding: 1.875rem 0;
   background-color: #fff;
   box-shadow: 3px 0px 20px 0px #0000000a;
 
   .logo-container {
-    width: $sidebar-width;
-    padding: 0 $sidebar-padding;
-    @include flex($align: center);
+    width: v.$sidebar-width;
+    padding: 0 v.$sidebar-padding;
+    @include v.flex($align: center);
 
     button {
       width: 1.6rem;
       margin-right: 1rem;
       background: none;
-      color: $text-color;
-      @include flex($align: center);
-      @include media(">tablet") {
+      color: v.$text-color;
+      @include v.flex($align: center);
+      @include v.media(">tablet") {
         display: none;
       }
     }
 
     .logo {
       width: 9.05rem;
-      @include flex($align: center);
+      @include v.flex($align: center);
     }
   }
 
   .topbar-content {
-    @include flex($align: center, $justify: space-between);
-    padding: 0 $body-padding;
+    @include v.flex($align: center, $justify: space-between);
+    padding: 0 v.$body-padding;
     width: 100%;
     .icon {
       cursor: pointer;
-      @include flex($justify: center, $align: center);
+      @include v.flex($justify: center, $align: center);
     }
 
     .search {
@@ -46,16 +48,16 @@
       }
 
       .icon {
-        background-color: $primary-color;
+        background-color: v.$primary-color;
         padding: 0.75rem 1.2rem;
         height: 100%;
-        border-top-right-radius: $input-radius;
-        border-bottom-right-radius: $input-radius;
+        border-top-right-radius: v.$input-radius;
+        border-bottom-right-radius: v.$input-radius;
       }
     }
 
     .shortcuts {
-      @include flex($align: center);
+      @include v.flex($align: center);
       gap: 1.875rem;
 
       .docs {
@@ -72,13 +74,13 @@
       }
 
       .user-data {
-        @include flex($align: center);
+        @include v.flex($align: center);
         gap: 0.625rem;
         font-weight: 500;
         cursor: pointer;
 
         img {
-          border-radius: $rounded-full;
+          border-radius: v.$rounded-full;
           aspect-ratio: 1;
           width: 3rem;
           height: 3rem;
@@ -91,8 +93,8 @@
       }
     }
 
-    @include media("<desktop") {
-      @include flex($align: center, $justify: flex-end);
+    @include v.media("<desktop") {
+      @include v.flex($align: center, $justify: flex-end);
 
       .search,
       .shortcuts .docs,
@@ -106,10 +108,10 @@
     }
   }
 
-  @include media("<desktop") {
+  @include v.media("<desktop") {
     .logo-container,
     .topbar-content {
-      padding: 0 $sidebar-padding;
+      padding: 0 v.$sidebar-padding;
     }
   }
 }

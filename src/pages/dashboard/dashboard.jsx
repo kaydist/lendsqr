@@ -1,5 +1,5 @@
 import React from "react";
-import InAppLayout from "../layout/inAppLayout";
+import InAppLayout from "../../layout/inAppLayout";
 
 export default function DashboardPage() {
   return (

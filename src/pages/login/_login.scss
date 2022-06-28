@@ -1,7 +1,9 @@
+@use "../../styles/index.scss" as v;
+
 .p-login {
-  @include flex;
+  @include v.flex;
   width: 100%;
-  background: $col-grey-100;
+  background: v.$col-grey-100;
 
   h1 {
     font-size: 2.5rem;
@@ -11,7 +13,7 @@
   .page-subtitle {
     font-size: 1.25rem;
     font-weight: 400;
-    color: $col-grey-500;
+    color: v.$col-grey-500;
     margin-top: 0.625rem;
   }
 
@@ -34,7 +36,7 @@
       transform: translateY(-50%);
     }
 
-    @include media("<desktop") {
+    @include v.media("<desktop") {
       display: none;
     }
   }
@@ -43,30 +45,30 @@
     min-height: 100vh;
     width: 48.89%;
     background-color: #fff;
-    @include flex($align: center, $justify: center);
+    @include v.flex($align: center, $justify: center);
 
-    @include media("<desktop") {
+    @include v.media("<desktop") {
       width: 100%;
     }
 
     padding: 2rem 9.8125rem 2rem 6.25rem;
-    @include media("<desktop") {
+    @include v.media("<desktop") {
       padding: 2rem;
     }
 
     .form-section {
       width: 100%;
-      @include media("<desktop") {
+      @include v.media("<desktop") {
         max-width: 350px;
         margin: 0 auto;
       }
 
-      @include flex($align: flex-start, $justify: center);
+      @include v.flex($align: flex-start, $justify: center);
       flex-direction: column;
 
       .logo {
         display: none;
-        @include media("<desktop") {
+        @include v.media("<desktop") {
           display: block;
           width: 10.875rem;
           margin: 0 auto 5rem;
@@ -74,7 +76,7 @@
       }
 
       form {
-        @include flex($align: flex-start, $justify: center);
+        @include v.flex($align: flex-start, $justify: center);
         flex-direction: column;
         gap: 1.5rem;
         width: 100%;
@@ -84,14 +86,14 @@
           width: 100%;
 
           .input-error {
-            color: $col-red-800;
+            color: v.$col-red-800;
             font-size: 0.75rem;
           }
         }
 
         .forgot-password,
         .input-container span {
-          color: $primary-color;
+          color: v.$primary-color;
           font-size: 0.75rem;
           font-weight: 600;
           cursor: pointer;
@@ -102,10 +104,10 @@
           margin-top: 0.375rem;
           width: 100%;
           color: white;
-          background-color: $primary-color;
+          background-color: v.$primary-color;
 
           &:hover {
-            background-color: darken($color: $primary-color, $amount: 10);
+            background-color: darken($color: v.$primary-color, $amount: 10);
           }
         }
       }

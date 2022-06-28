@@ -1,5 +1,7 @@
+@use "../../styles/index.scss" as v;
+
 .sidebar {
-  width: $sidebar-width;
+  width: v.$sidebar-width;
   background-color: #fff;
   top: 0;
   bottom: 0;
@@ -10,13 +12,13 @@
 
   .nav-link-group {
     margin-top: 1.9375rem;
-    @include flex;
+    @include v.flex;
     flex-direction: column;
 
     h4 {
       font-size: 0.75rem;
       font-weight: 500;
-      padding: 0 $sidebar-padding;
+      padding: 0 v.$sidebar-padding;
       text-transform: uppercase;
     }
     a {
@@ -29,15 +31,15 @@
   }
 
   .nav-link {
-    @include flex($align: center);
+    @include v.flex($align: center);
     gap: 0.625rem;
-    padding: 0.625rem $sidebar-padding;
+    padding: 0.625rem v.$sidebar-padding;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
 
     .icon {
       width: 1rem;
-      @include flex($align: center);
+      @include v.flex($align: center);
     }
 
     .dropdown.icon {
@@ -52,18 +54,18 @@
     }
 
     &:hover {
-      background-color: rgba($primary-color, $alpha: 0.06);
+      background-color: rgba(v.$primary-color, $alpha: 0.06);
     }
   }
 
   .nav-link.active {
     position: relative;
     opacity: 1;
-    background-color: rgba($primary-color, $alpha: 0.06);
+    background-color: rgba(v.$primary-color, $alpha: 0.06);
 
     &::before {
       width: 0.3rem;
-      background-color: $primary-color;
+      background-color: v.$primary-color;
       position: absolute;
       content: "";
       top: 0;

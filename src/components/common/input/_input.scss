@@ -1,19 +1,21 @@
+@use "/src/styles/index.scss" as v;
+
 .input-container {
   width: 100%;
   font-size: 0.875rem;
   border: 1px solid;
-  border-color: rgba($col-grey-500, 15%);
-  border-radius: $input-radius;
-  @include flex($align: center);
+  border-color: rgba(v.$col-grey-500, 15%);
+  border-radius: v.$input-radius;
+  @include v.flex($align: center);
 
   &:focus-within {
-    border-color: rgba($col-blue-800, 80%);
+    border-color: rgba(v.$col-blue-800, 80%);
   }
 
   input {
     width: 100%;
     padding: 1rem 1.01rem;
-    border-radius: $input-radius;
+    border-radius: v.$input-radius;
     border: 0;
     outline: 0;
     font-size: inherit;
@@ -25,11 +27,11 @@
     }
 
     &::placeholder {
-      color: $col-grey-500;
+      color: v.$col-grey-500;
     }
   }
 
   .input-error {
-    color: $col-red-600;
+    color: v.$col-red-600;
   }
 }

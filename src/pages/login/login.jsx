@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import "./_login.scss";
 import { Formik } from "formik";
 
 //components
-import FillButton from "../components/common/button";
-import Input from "../components/common/input";
+import FillButton from "../../components/common/button/button";
+import Input from "../../components/common/input/input";
 
 //icons
-import { ReactComponent as Logo } from "../assets/brand/logo.svg";
-import SignInIllustration from "../assets/brand/sign-in-illustration.png";
+import { ReactComponent as Logo } from "../../assets/brand/logo.svg";
+import SignInIllustration from "../../assets/brand/sign-in-illustration.png";
 
 export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);

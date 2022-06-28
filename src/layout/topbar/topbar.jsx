@@ -1,6 +1,6 @@
 import React from "react";
-
-import Input from "../../components/common/input";
+import "./_topbar.scss";
+import Input from "../../components/common/input/input";
 
 //icons
 import User from "../../assets/brand/user.png";
