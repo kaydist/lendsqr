@@ -12,9 +12,21 @@
     top: $topbar-height;
     left: 0;
     z-index: $sidebar-index;
+    transition: all 0.2s ease-in-out;
+
+    @include media("<desktop") {
+      left: -100%;
+    }
+
+    &.open {
+      left: 0;
+    }
   }
+
   .main-content {
-    margin-left: $sidebar-width;
+    @include media(">tablet") {
+      margin-left: $sidebar-width;
+    }
     padding-top: $topbar-height;
     background-color: $body-bg;
     min-height: 100vh;

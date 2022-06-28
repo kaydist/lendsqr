@@ -39,11 +39,13 @@ export default function Sidebar() {
 
   return (
     <div className="sidebar">
+      <div className="switch-organization">
       <NavComponent
         icon={<SwitchOrganizationIcon />}
         title="Switch Organization"
         dropdown={true}
       />
+      </div>
 
       <NavComponent
         icon={<HomeIcon />}

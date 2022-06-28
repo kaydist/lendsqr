@@ -1,5 +1,7 @@
 .topbar {
-  @include flex($align: center);
+  display: grid;
+  grid-template-columns: $sidebar-width 1fr;
+  place-content: center;
   width: 100%;
   height: $topbar-height;
   padding: 1.875rem 0;
@@ -11,8 +13,20 @@
     padding: 0 $sidebar-padding;
     @include flex($align: center);
 
+    button {
+      width: 1.6rem;
+      margin-right: 1rem;
+      background: none;
+      color: $text-color;
+      @include flex($align: center);
+      @include media(">tablet") {
+        display: none;
+      }
+    }
+
     .logo {
       width: 9.05rem;
+      @include flex($align: center);
     }
   }
 
@@ -54,7 +68,7 @@
       }
 
       .icon.notification {
-        width: 1.625rem;
+        width: 1.25rem;
       }
 
       .user-data {
@@ -81,13 +95,21 @@
       @include flex($align: center, $justify: flex-end);
 
       .search,
-      .shortcuts .docs {
+      .shortcuts .docs,
+      .user-data .name {
         display: none;
       }
 
       .shortcuts .icon.search {
         display: block;
       }
+    }
+  }
+
+  @include media("<desktop") {
+    .logo-container,
+    .topbar-content {
+      padding: 0 $sidebar-padding;
     }
   }
 }

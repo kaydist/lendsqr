@@ -9,7 +9,7 @@
   padding: 2.4375rem 0;
 
   .nav-link-group {
-    margin-top: 2.56rem;
+    margin-top: 1.9375rem;
     @include flex;
     flex-direction: column;
 
@@ -24,12 +24,15 @@
     }
   }
 
+  .switch-organization {
+    margin-bottom: 2.625rem;
+  }
+
   .nav-link {
     @include flex($align: center);
     gap: 0.625rem;
     padding: 0.625rem $sidebar-padding;
     cursor: pointer;
-    opacity: 0.6;
     transition: background-color 0.2s ease-in-out;
 
     .icon {
@@ -40,6 +43,12 @@
     .dropdown.icon {
       width: 0.875rem;
       height: 0.875rem;
+    }
+
+    &:not(.switch-organization .nav-link) {
+      &:not(.active) {
+        opacity: 0.6;
+      }
     }
 
     &:hover {
