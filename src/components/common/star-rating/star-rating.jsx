@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./_star-rating.scss";
 
 export default function StarRatinng({rating}) {

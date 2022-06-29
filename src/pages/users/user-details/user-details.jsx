@@ -7,6 +7,7 @@ import OutlinedButton from "../../../components/common/outlined-button/outlined-
 import BackButton from "../../../components/common/back-button/back-button";
 import Card from "../../../components/common/card/card";
 import StarRating from "../../../components/common/star-rating/star-rating";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 //icons
 import { ReactComponent as DefaultAvater } from "../../../assets/icons/user.svg";
@@ -30,45 +31,58 @@ export default function UserDetailsPage() {
           </div>
         </div>
 
-        <Card>
-          <div className="basic-info">
-            <div className="user-info">
-              <div className="avater">
-                <DefaultAvater />
-              </div>
-
-              <div className="name">
-                <h2>Grace Effiom</h2>
-                <p>LSQFf587g90</p>
-              </div>
-            </div>
-
-            <div className="tier">
-              <p>User’s Tier</p>
-              <StarRating rating={2} />
-            </div>
-
-            <div className="financial-info">
-              <h2>{`\u20A6`}200,000.00</h2>
-              <p>9912345678/Providus Bank</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="full-details-container">
-          <div className="detail-section">
-            <h4 className="section-title">Personal Information</h4>
-
-            <div className="detail-row">
-                <div className="detail-field">
-                  <h6 className="field-title">Full Name</h6>
-                  <p>Grace Effiom</p>
+        <Tabs>
+          <Card className="basic-info-container">
+            <div className="basic-info">
+              <div className="user-info">
+                <div className="avater">
+                  <DefaultAvater />
                 </div>
-            </div>
-          </div>
 
-          
-        </Card>
+                <div className="name">
+                  <h2>Grace Effiom</h2>
+                  <p>LSQFf587g90</p>
+                </div>
+              </div>
+
+              <div className="tier">
+                <p>User’s Tier</p>
+                <StarRating rating={2} />
+              </div>
+
+              <div className="financial-info">
+                <h2>{`\u20A6`}200,000.00</h2>
+                <p>9912345678/Providus Bank</p>
+              </div>
+            </div>
+
+            <div className="tab-list-container">
+              <TabList>
+                <Tab>General Information</Tab>
+                <Tab>Document</Tab>
+                <Tab>Bank Details</Tab>
+                <Tab>Loans</Tab>
+                <Tab>Savings</Tab>
+                <Tab>App and System</Tab>
+              </TabList>
+            </div>
+          </Card>
+
+          <Card className="full-details-container">
+            <TabPanel>
+              <div className="detail-section">
+                <h4 className="section-title">Personal Information</h4>
+
+                <div className="detail-row">
+                  <div className="detail-field">
+                    <h6 className="field-title">Full Name</h6>
+                    <p>Grace Effiom</p>
+                  </div>
+                </div>
+              </div>
+            </TabPanel>
+          </Card>
+        </Tabs>
       </div>
     </InAppLayout>
   );

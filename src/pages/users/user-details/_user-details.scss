@@ -20,71 +20,113 @@ $section-spacing: 1.875rem;
       }
     }
   }
+  .basic-info-container {
+    padding-bottom: 0;
 
-  .basic-info {
-    @include v.flex($align: center);
-    flex-wrap: wrap;
-    gap: 1.875rem;
-
-    .user-info {
+    .basic-info {
       @include v.flex($align: center);
-    }
+      flex-wrap: wrap;
+      gap: 1.875rem;
+      margin-bottom: 3.125rem;
 
-    .avater {
-      @include v.flex($align: center, $justify: center);
-      width: 6.25rem;
-      height: 6.25rem;
-      border-radius: 50%;
-      overflow: hidden;
-      background: rgba(v.$col-blue-800, $alpha: 0.16);
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    .name,
-    .financial-info {
-      h2 {
-        font-size: 1.375rem;
-        font-weight: 500;
+      .user-info {
+        @include v.flex($align: center);
       }
 
-      p {
+      .avater {
+        @include v.flex($align: center, $justify: center);
+        width: 6.25rem;
+        height: 6.25rem;
+        border-radius: 50%;
+        overflow: hidden;
+        background: rgba(v.$col-blue-800, $alpha: 0.16);
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .name,
+      .financial-info {
+        h2 {
+          font-size: 1.375rem;
+          font-weight: 500;
+        }
+
+        p {
+          font-size: 0.875rem;
+          font-weight: 400;
+          margin-top: 0.5rem;
+        }
+      }
+
+      .name {
+        margin-left: 1.25rem;
+        p {
+          color: v.$col-grey-500;
+        }
+      }
+
+      .financial-info {
+        p {
+          margin-top: 0.5rem;
+          font-size: 0.75rem;
+        }
+      }
+
+      .tier {
+        height: 5rem;
         font-size: 0.875rem;
         font-weight: 400;
-        margin-top: 0.5rem;
+        padding: 0 1.875rem;
+        border-left: 1px solid rgba(v.$col-grey-500, $alpha: 0.2);
+        border-right: 1px solid rgba(v.$col-grey-500, $alpha: 0.2);
+        @include v.flex($align: center, $justify: center);
+        flex-direction: column;
+
+        p {
+          margin-bottom: 0.675rem;
+          font-weight: 500;
+          color: v.$col-grey-500;
+        }
       }
     }
 
-    .name {
-      margin-left: 1.25rem;
-      p {
-        color: v.$col-grey-500;
-      }
-    }
+    .tab-list-container {
+      overflow-x: auto;
+      max-width: 100%;
 
-    .financial-info {
-      p {
-        margin-top: 0.5rem;
-        font-size: 0.75rem;
-      }
-    }
+      .react-tabs__tab-list {
+        list-style-type: none;
+        @include v.flex($align: center, $justify: space-between);
+        min-width: 650px;
 
-    .tier {
-      height: 5rem;
-      font-size: 0.875rem;
-      font-weight: 400;
-      padding: 0 1.875rem;
-      border-left: 1px solid rgba(v.$col-grey-500, $alpha: 0.2);
-      border-right: 1px solid rgba(v.$col-grey-500, $alpha: 0.2);
-      @include v.flex($align: center, $justify: center);
-      flex-direction: column;
+        .react-tabs__tab {
+          padding: 0.675rem 0;
+          color: #00000080;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          &:hover {
+            color: v.$primary-color;
+          }
+        }
 
-      p {
-        margin-bottom: 0.675rem;
-        font-weight: 500;
-        color: v.$col-grey-500;
+        .react-tabs__tab--selected {
+          position: relative;
+          outline: 0;
+          color: v.$primary-color;
+
+          &::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            content: "";
+            width: 100%;
+            height: 2px;
+            background-color: v.$primary-color;
+          }
+        }
       }
     }
   }
