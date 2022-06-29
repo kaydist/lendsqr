@@ -1,11 +1,20 @@
+import React from "react";
+import { ReactComponent as FilterIcon } from "../../assets/icons/filter.svg";
+
 const TableHeading = ({ headings, cellClass, ...rest }) => {
   return (
     <thead {...rest}>
       <tr>
         {headings.map((title, idx) => {
           return (
-            <th key={idx} className={`table-heading ${cellClass}`}>
-              {title}
+            <th
+              key={idx}
+              className={`table-heading ${cellClass ? cellClass : ``}`}
+            >
+              {title}{" "}
+              <span className="filter-icon">
+                <FilterIcon />
+              </span>
             </th>
           );
         })}
@@ -16,7 +25,7 @@ const TableHeading = ({ headings, cellClass, ...rest }) => {
 
 const TableBody = ({ children, className, ...rest }) => {
   return (
-    <tbody className={`table-field ${className ? className : ""} `} {...rest}>
+    <tbody className={`table-body ${className ? className : ""} `} {...rest}>
       {children}
     </tbody>
   );
@@ -24,7 +33,7 @@ const TableBody = ({ children, className, ...rest }) => {
 
 const TableRow = ({ children, className, padding, ...rest }) => {
   return (
-    <tr className={`${className ? className : ""}`} {...rest}>
+    <tr className={`table-row ${className ? className : ""}`} {...rest}>
       {children}
     </tr>
   );

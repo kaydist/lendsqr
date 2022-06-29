@@ -14,6 +14,7 @@ import { ReactComponent as UserIcon } from "./assets/user-card-illustration.svg"
 import { ReactComponent as ActiveUserIcon } from "./assets/active-user.svg";
 import { ReactComponent as UsersWithLoanIcon } from "./assets/user-with-loan.svg";
 import { ReactComponent as UsersWithSavingsIcon } from "./assets/user-with-savings.svg";
+import { ReactComponent as MoreIcon } from "../../assets/icons/more.svg";
 
 export default function Users() {
   return (
@@ -48,8 +49,7 @@ export default function Users() {
           })}
         </div>
 
-        <Card>
-          <Table>
+          <Table className="users-table">
             <TableHeading
               headings={[
                 "Organizations",
@@ -69,11 +69,28 @@ export default function Users() {
                 <td>08023456789</td>
                 <td>May 15, 2020 10:00 AM</td>
                 <td>Inactive</td>
-                <td>More</td>
+                <td className="more-column">
+                  <button>
+                    <MoreIcon />
+                  </button>
+                </td>
+              </TableRow>
+
+              <TableRow>
+                <td>Lendsqr</td>
+                <td>Adedeji</td>
+                <td>Adedeji@lendsqr.com</td>
+                <td>08023456789</td>
+                <td>May 15, 2020 10:00 AM</td>
+                <td>Inactive</td>
+                <td className="more-column">
+                  <button>
+                    <MoreIcon />
+                  </button>
+                </td>
               </TableRow>
             </TableBody>
           </Table>
-        </Card>
       </div>
     </InAppLayout>
   );

@@ -1,10 +1,47 @@
-table{
+@use "/src/styles/index.scss" as v;
+
+.table-container {
+  color: v.$col-grey-500;
+
+  table {
     width: 100%;
     text-align: left;
+    border-collapse: collapse;
 
-    th{
-        font-size: 0.75rem;
-        font-weight: 600;
-        text-transform: uppercase;
+    th {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding-bottom: 1.875rem;
+
+      .filter-icon{
+        margin-left: 0.625rem;
+        height: 1rem;
+        width: 1rem;
+        cursor: pointer;
+      }
     }
+
+    .table-row {
+      td {
+        padding: 1rem 0;
+      }
+
+      &:not(:first-of-type) {
+        border-top: 1px solid rgba(v.$text-color, 0.1);
+      }
+    }
+  }
+
+  .table-selection-details {
+    margin-top: 1.25rem;
+    @include v.flex($justify: space-between, $align: center);
+
+    .current-count {
+      font-size: 0.875rem;
+      span {
+        padding: 0 0.625rem;
+      }
+    }
+  }
 }
