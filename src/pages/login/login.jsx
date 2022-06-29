@@ -14,7 +14,7 @@ export default function LoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
-    <div className="p-login">
+    <div className="login-page">
       <div className="svg-section">
         <div className="logo">
           <Logo />

@@ -1,4 +1,9 @@
+@use "/src/styles/mixins/layout.scss" as v;
+
 .star-rating {
+  @include v.flex($align: center, $justify: flex-start);
+  gap: 0.25rem;
+
   button {
     background-color: transparent;
     border: none;
@@ -10,5 +15,9 @@
   }
   .off {
     color: #ccc;
+  }
+
+  .star {
+    display: inline-block;
   }
 }

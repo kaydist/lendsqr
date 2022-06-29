@@ -1,9 +1,10 @@
 @use "../../styles/index.scss" as v;
 
-.p-login {
+.login-page {
   @include v.flex;
   width: 100%;
   background: v.$col-grey-100;
+  font-family: "AvenirNext";
 
   h1 {
     font-size: 2.5rem;
