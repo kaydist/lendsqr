@@ -15,8 +15,13 @@ import { ReactComponent as ActiveUserIcon } from "./assets/active-user.svg";
 import { ReactComponent as UsersWithLoanIcon } from "./assets/user-with-loan.svg";
 import { ReactComponent as UsersWithSavingsIcon } from "./assets/user-with-savings.svg";
 import { ReactComponent as MoreIcon } from "../../assets/icons/more.svg";
+import DropdownMenu from "../../components/common/dropdown/dropdown-menu";
+import DropdownOption from "../../components/common/dropdown/dropdown-option";
 
 export default function Users() {
+  const openDropdown = (idx) => {
+    document.querySelector(".more-option-menu" + idx).classList.toggle("open");
+  };
   return (
     <InAppLayout>
       <div className="page-content user-page">
@@ -49,48 +54,46 @@ export default function Users() {
           })}
         </div>
 
-          <Table className="users-table">
-            <TableHeading
-              headings={[
-                "Organizations",
-                "UserName",
-                "Email",
-                "Phone Number",
-                "Date Joined",
-                "Status",
-              ]}
-            />
+        <Table className="users-table">
+          <TableHeading
+            headings={[
+              "Organizations",
+              "UserName",
+              "Email",
+              "Phone Number",
+              "Date Joined",
+              "Status",
+            ]}
+          />
 
-            <TableBody>
-              <TableRow>
-                <td>Lendsqr</td>
-                <td>Adedeji</td>
-                <td>Adedeji@lendsqr.com</td>
-                <td>08023456789</td>
-                <td>May 15, 2020 10:00 AM</td>
-                <td>Inactive</td>
-                <td className="more-column">
-                  <button>
-                    <MoreIcon />
-                  </button>
-                </td>
-              </TableRow>
+          <TableBody>
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
 
-              <TableRow>
-                <td>Lendsqr</td>
-                <td>Adedeji</td>
-                <td>Adedeji@lendsqr.com</td>
-                <td>08023456789</td>
-                <td>May 15, 2020 10:00 AM</td>
-                <td>Inactive</td>
-                <td className="more-column">
-                  <button>
-                    <MoreIcon />
-                  </button>
-                </td>
-              </TableRow>
-            </TableBody>
-          </Table>
+                <DropdownMenu className="more-option-menu1">
+                  <DropdownOption>View Details</DropdownOption>
+                  <DropdownOption>Blacklist User</DropdownOption>
+                  <DropdownOption>Activate User</DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            
+          </TableBody>
+        </Table>
       </div>
     </InAppLayout>
   );

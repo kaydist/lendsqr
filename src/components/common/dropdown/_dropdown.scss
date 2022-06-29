@@ -1,0 +1,38 @@
+@use "/src/styles/index.scss" as v;
+
+.dropdown-menu {
+  position: absolute;
+  top: auto;
+  right: 0;
+  z-index: 1000;
+  padding: 0.625rem 0;
+  min-width: 180px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  transform: scale(0);
+  transform-origin: top right;
+  transition: all 0.2s ease-in-out;
+
+  .dropdown-option {
+    padding: 0.5rem 1rem;
+    display: block;
+    white-space: nowrap;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    &:hover {
+      background-color: v.$sidebar-active-bg;
+    }
+  }
+}
+
+.dropdown-menu.open{
+    transform: scale(1);
+}

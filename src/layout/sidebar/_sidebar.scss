@@ -55,14 +55,14 @@
     }
 
     &:hover {
-      background-color: rgba(v.$primary-color, $alpha: 0.06);
+      background-color: v.$sidebar-active-bg;
     }
   }
 
   .nav-link.active {
     position: relative;
     opacity: 1;
-    background-color: rgba(v.$primary-color, $alpha: 0.06);
+    background-color: v.$sidebar-active-bg;
 
     &::before {
       width: 0.3rem;
