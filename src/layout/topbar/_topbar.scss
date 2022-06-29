@@ -34,7 +34,7 @@
 
   .topbar-content {
     @include v.flex($align: center, $justify: space-between);
-    padding: 0 v.$body-padding;
+    padding: 0 v.$body-padding-desktop;
     width: 100%;
     .icon {
       cursor: pointer;
@@ -108,10 +108,13 @@
     }
   }
 
-  @include v.media("<desktop") {
-    .logo-container,
-    .topbar-content {
-      padding: 0 v.$sidebar-padding;
+  .logo-container,
+  .topbar-content {
+    @include v.media("<desktop") {
+      padding: 0 v.$body-padding-tablet;
+    }
+    @include v.media("<tablet") {
+      padding: 0 v.$body-padding-mobile;
     }
   }
 }

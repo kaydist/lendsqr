@@ -29,11 +29,18 @@
     background-color: v.$body-bg;
     min-height: 100vh;
     margin-left: v.$sidebar-width;
-    padding: (v.$topbar-height + v.$body-padding) v.$body-padding;
+    padding: (v.$topbar-height + v.$body-padding-desktop)
+      v.$body-padding-desktop;
 
     @include v.media("<desktop") {
       margin-left: 0;
-      padding: (v.$topbar-height + v.$body-padding) v.$sidebar-padding;
+      padding: (v.$topbar-height + v.$body-padding-tablet)
+        v.$body-padding-tablet;
+    }
+    @include v.media("<desktop") {
+      margin-left: 0;
+      padding: (v.$topbar-height + v.$body-padding-mobile)
+        v.$body-padding-mobile;
     }
   }
 }

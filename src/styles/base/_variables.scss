@@ -15,7 +15,9 @@ $text-color: $col-blue-800;
 $danger: $col-red-800;
 $body-bg: $col-grey-100;
 
-$body-padding: 3.75rem;
+$body-padding-mobile: 1rem;
+$body-padding-tablet: 1.875rem;
+$body-padding-desktop: 3.75rem;
 
 // roundness
 $input-radius: 0.5rem;
