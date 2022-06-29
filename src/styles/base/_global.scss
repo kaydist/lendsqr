@@ -67,3 +67,19 @@ img {
     font-weight: 500;
   }
 }
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 5px;
+  max-height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $text-color;
+  border-radius: 10px;
+  margin-right: 5px;
+}
