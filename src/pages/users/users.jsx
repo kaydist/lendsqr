@@ -2,6 +2,12 @@ import React from "react";
 import "./_user.scss";
 import InAppLayout from "../../layout/inAppLayout";
 import Card from "../../components/common/card/card";
+import {
+  TableBody,
+  TableHeading,
+  TableRow,
+} from "../../components/table/table-components";
+import Table from "../../components/table/table";
 
 //Icons
 import { ReactComponent as UserIcon } from "./assets/user-card-illustration.svg";
@@ -41,6 +47,33 @@ export default function Users() {
             );
           })}
         </div>
+
+        <Card>
+          <Table>
+            <TableHeading
+              headings={[
+                "Organizations",
+                "UserName",
+                "Email",
+                "Phone Number",
+                "Date Joined",
+                "Status",
+              ]}
+            />
+
+            <TableBody>
+              <TableRow>
+                <td>Lendsqr</td>
+                <td>Adedeji</td>
+                <td>Adedeji@lendsqr.com</td>
+                <td>08023456789</td>
+                <td>May 15, 2020 10:00 AM</td>
+                <td>Inactive</td>
+                <td>More</td>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Card>
       </div>
     </InAppLayout>
   );
