@@ -1,5 +1,7 @@
 @use "/src/styles/index.scss" as v;
 
+$section-spacing: 1.875rem;
+
 .user-details-page {
   .page-heading {
     @include v.flex($align: center, $justify: space-between);
@@ -83,6 +85,40 @@
         margin-bottom: 0.675rem;
         font-weight: 500;
         color: v.$col-grey-500;
+      }
+    }
+  }
+
+  .full-details-container {
+    margin-top: $section-spacing;
+    .detail-section {
+      font-weight: 500;
+
+      .detail-row {
+        padding: $section-spacing 0;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: $section-spacing;
+        @include v.media("<tablet") {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        }
+
+        .detail-field {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          .field-title {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: v.$col-grey-500;
+          }
+        }
+      }
+
+      &:not(:first-of-type) {
+        padding-top: $section-spacing;
+        border-top: 1px solid rgba(v.$col-blue-800, $alpha: 0.1);
       }
     }
   }

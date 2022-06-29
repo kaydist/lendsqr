@@ -54,6 +54,21 @@ export default function UserDetailsPage() {
             </div>
           </div>
         </Card>
+
+        <Card className="full-details-container">
+          <div className="detail-section">
+            <h4 className="section-title">Personal Information</h4>
+
+            <div className="detail-row">
+                <div className="detail-field">
+                  <h6 className="field-title">Full Name</h6>
+                  <p>Grace Effiom</p>
+                </div>
+            </div>
+          </div>
+
+          
+        </Card>
       </div>
     </InAppLayout>
   );
