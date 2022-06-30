@@ -1,7 +1,7 @@
 export const openDropdown = (selector, idx) => {
-  setTimeout(() => {
-    const dropdown = document.querySelector(`${selector}`);
+  const dropdown = document.querySelector(`${selector}`);
 
+  setTimeout(() => {
     if (!dropdown.classList.contains("open")) {
       dropdown.classList.add("open");
     } else {

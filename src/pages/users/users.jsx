@@ -30,25 +30,25 @@ import { ReactComponent as ViewDetailsIcon } from "../../assets/icons/view.svg";
 import { ReactComponent as ActivateUserIcon } from "../../assets/icons/activate-user.svg";
 import { useEffect } from "react";
 import axios from "axios";
+import { users } from "../../dummy-data";
 
 export default function Users() {
   const navigate = useNavigate();
-  const [users, setUsers] = React.useState([]);
+  // const [users, setUsers] = React.useState([]);
 
   useEffect(() => {
-    axios
-      .get("https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users")
-      .then((res) => {
-        setUsers(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get("../../dummy-data")
+    //   .then((res) => {
+    //     setUsers(res.data);
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   const gotoUserDetails = (user) => {
-    console.log(user);
     navigate(`/users/${user}`, { replace: true });
   };
 
@@ -123,7 +123,8 @@ export default function Users() {
                   <td className="email-col">{user?.email}</td>
                   <td className="phone-col">{user?.phoneNumber}</td>
                   <td className="created-col">{user?.createdAt}</td>
-                  <td className="status-col">Inactive</td>
+                  <td className="status-col">
+                    <span>{user?.status}</span></td>
                   <td className="actions-col">
                     <button
                       onClick={() => {

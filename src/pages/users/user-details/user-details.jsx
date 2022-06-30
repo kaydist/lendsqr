@@ -14,25 +14,27 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { ReactComponent as DefaultAvater } from "../../../assets/icons/user.svg";
 import GeneralInfo from "./general-info-tab";
 
+import { users } from "../../../dummy-data";
+
 export default function UserDetailsPage() {
-  const [userInfo, setUserInfo] = useState([]);
+  const [userInfo, setUserInfo] = useState(users[1]);
 
   useEffect(() => {
     let userId = null;
     if (window.location.pathname.split("/").length > 2) {
       userId = window.location.pathname.split("/")[2];
     }
-    axios
-      .get(
-        `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${userId}`
-      )
-      .then((res) => {
-        setUserInfo(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // axios
+    //   .get(
+    //     `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${userId}`
+    //   )
+    //   .then((res) => {
+    //     setUserInfo(res.data);
+    //     console.log(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   }, []);
 
   return (
@@ -67,7 +69,7 @@ export default function UserDetailsPage() {
 
                 <div className="name">
                   <h2>{userInfo?.userName}</h2>
-                  <p>LSQFf587g90</p>
+                  <p>{userInfo?.uid}</p>
                 </div>
               </div>
 
@@ -102,7 +104,6 @@ export default function UserDetailsPage() {
           <Card className="full-details-container">
             <TabPanel>
               <GeneralInfo userInfo={userInfo} />
-              
             </TabPanel>
             <TabPanel>Document</TabPanel>
             <TabPanel>Bank Details</TabPanel>

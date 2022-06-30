@@ -82,12 +82,18 @@ export default function GeneralInfo({ userInfo }) {
 
           <div className="detail-field">
             <h6 className="field-title">monthly income</h6>
-            <p>{userInfo?.education?.monthlyIncome}</p>
+            <p>
+              {userInfo?.education?.monthlyIncome
+                .map((amount) => {
+                  return `\u20A6` + amount;
+                })
+                .join(" - ")}
+            </p>
           </div>
 
           <div className="detail-field">
             <h6 className="field-title">Loan Repayment</h6>
-            <p>{userInfo?.education?.loanRepayment}</p>
+            <p>{`\u20A6${userInfo?.education?.loanRepayment}`}</p>
           </div>
         </div>
       </section>
