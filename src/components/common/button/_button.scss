@@ -1,11 +1,15 @@
-@use "/src/styles/mixins/layout.scss" as v;
+@use "/src/styles/mixins/layout.scss" as layout;
+@use "/src/styles/base/variables" as variable;
 
 .btn {
-  @include v.flex($align: center, $justify: center);
+  @include layout.flex($align: center, $justify: center);
   gap: 0.5rem;
   font-size: 0.875rem;
-  padding: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.875rem;
   border: 0;
   border-radius: 0.5rem;
+  background-color: variable.$primary-color;
+  color: white;
   transition: all 0.3s ease-in-out;
 }

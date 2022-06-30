@@ -3,8 +3,10 @@ import "./_dropdown.scss";
 
 export default function DropdownMenu({ className, children, ...rest }) {
   useLayoutEffect(() => {
+    // Function to close on click outside of dropdown
+
     const popupQuerySelector = ".dropdown-menu";
-    const popupEl = document.querySelector(popupQuerySelector);
+    const popupEl = document.querySelectorAll(popupQuerySelector);
 
     document.addEventListener("click", (e) => {
       // Check if the filter list parent element exist
@@ -12,9 +14,12 @@ export default function DropdownMenu({ className, children, ...rest }) {
 
       // If `isClosest` equals falsy & popup has the class `show`
       // then hide the popup
-      if (!isClosest && popupEl.classList.contains("open")) {
-        popupEl.classList.remove("open");
-      }
+
+      popupEl.forEach((el) => {
+        if (!isClosest && el.classList.contains("open")) {
+          el.classList.remove("open");
+        }
+      });
     });
   }, []);
 

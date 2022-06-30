@@ -42,9 +42,10 @@
     }
 
     .search {
+      position: relative;
       input {
-        padding: 0 1.2rem;
         width: 21.6rem;
+        margin-right: 2.4rem;
       }
 
       .icon {
@@ -53,6 +54,9 @@
         height: 100%;
         border-top-right-radius: v.$input-radius;
         border-bottom-right-radius: v.$input-radius;
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     }
 

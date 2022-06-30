@@ -68,7 +68,15 @@ img {
   }
 }
 
-/* Scroll Bar */
+.input-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+  text-transform: capitalize;
+  display: block;
+}
+
+/* Custom Scroll Bar */
 ::-webkit-scrollbar {
   width: 5px;
   max-height: 5px;

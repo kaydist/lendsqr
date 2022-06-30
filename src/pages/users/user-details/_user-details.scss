@@ -10,6 +10,12 @@ $section-spacing: 1.875rem;
       @include v.flex($align: center, $justify: center);
       gap: 1.25rem;
 
+      button {
+        letter-spacing: 0.1em;
+        padding: 0.75rem 1rem;
+        text-transform: uppercase;
+      }
+
       .blacklist-btn {
         border-color: v.$danger;
         color: v.$danger;

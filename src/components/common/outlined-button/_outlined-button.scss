@@ -1,18 +1,12 @@
 @use "/src/styles/index.scss" as v;
+@use "../button/_button.scss" as button;
 
 .outlined-btn {
-  @include v.flex($align: center, $justify: center);
-  gap: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  @extend button, .btn;
   color: v.$primary-color;
-  padding: 0.75rem 1rem;
   border: 1px solid v.$primary-color;
   border-radius: 0.5rem;
   background-color: transparent;
-  transition: all 0.3s ease-in-out;
 
   &:hover {
     background-color: v.$primary-color;

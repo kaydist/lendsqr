@@ -28,8 +28,7 @@ export default function Topbar() {
       </div>
 
       <div className="topbar-content">
-        <div className="input-field search">
-          <div className="input-container">
+        <div className="search">
             <Input
               type="text"
               name="search"
@@ -39,7 +38,6 @@ export default function Topbar() {
             <button type="submit" className="icon">
               <SearchIcon />
             </button>
-          </div>
         </div>
 
         <div className="shortcuts">

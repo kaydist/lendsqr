@@ -1,32 +1,36 @@
 @use "/src/styles/base/variables" as v;
 
+.input-field-container .react-select_container {
+  width: 100%;
+}
+
 .react-select__control {
-    border-color: v.$border-color !important;
-    box-shadow: none !important;
-  }
-  
-  .react-select__control--is-focused {
-    border-color: v.$col-blue-800 !important;
-  }
-  
-  .react-select__input-container {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  .react-select__value-container {
-    padding: 0.625rem 1.25rem !important;
-  }
-  
-  .react-select__option--is-focused {
-    background-color: v.$sidebar-active-bg !important;
-  }
-  
-  .react-select__option--is-selected {
-    background-color: v.$primary-color !important;
-  }
-  
-  .react-select__indicator-separator {
-    display: none;
-  }
-  
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: v.$input-radius !important;
+}
+
+.react-select__control--is-focused {
+  border: 0 !important;
+}
+
+.react-select__input-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.react-select__value-container {
+  padding: 0.625rem 1.25rem !important;
+}
+
+.react-select__option--is-focused {
+  background-color: v.$sidebar-active-bg !important;
+}
+
+.react-select__option--is-selected {
+  background-color: v.$primary-color !important;
+}
+
+.react-select__indicator-separator {
+  display: none;
+}

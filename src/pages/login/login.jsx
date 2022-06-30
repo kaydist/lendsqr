@@ -68,23 +68,21 @@ export default function LoginPage() {
             }) => (
               <form onSubmit={handleSubmit}>
                 <div className="input-field">
-                  <div className="input-container">
-                    <Input
-                      type="email"
-                      name="email"
-                      placeholder="Email"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                  </div>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                  />
                   <label className="input-error">
                     {errors.email && touched.email && errors.email}
                   </label>
                 </div>
 
                 <div className="input-field">
-                  <div className="input-container password">
+                  <div className="password">
                     <Input
                       type={passwordVisible ? `text` : "password"}
                       name="password"
@@ -98,6 +96,7 @@ export default function LoginPage() {
                       onClick={() => {
                         setPasswordVisible(!passwordVisible);
                       }}
+                      className="password-visibility"
                     >
                       {passwordVisible ? "Hide" : "Show"}
                     </span>

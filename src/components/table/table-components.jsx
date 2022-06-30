@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactComponent as FilterIcon } from "../../assets/icons/filter.svg";
+import { openDropdown } from "../../utils/dropdown";
 
 const TableHeading = ({ headings, cellClass, ...rest }) => {
   return (
@@ -12,7 +13,12 @@ const TableHeading = ({ headings, cellClass, ...rest }) => {
               className={`table-heading ${cellClass ? cellClass : ``}`}
             >
               {title}{" "}
-              <span className="filter-icon">
+              <span
+                className="filter-icon"
+                onClick={() => {
+                  openDropdown(".filter-dropdown");
+                }}
+              >
                 <FilterIcon />
               </span>
             </th>

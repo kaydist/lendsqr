@@ -1,6 +1,6 @@
 @use "/src/styles/index.scss" as v;
 
-.input-container {
+.input-field-container {
   width: 100%;
   font-size: 0.875rem;
   border: 1px solid;
@@ -14,7 +14,7 @@
 
   input {
     width: 100%;
-    padding: 1rem 1.01rem;
+    padding: 0.75rem 1.2rem;
     border-radius: v.$input-radius;
     border: 0;
     outline: 0;

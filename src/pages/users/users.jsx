@@ -1,6 +1,9 @@
 import React from "react";
 import "./_user.scss";
 import InAppLayout from "../../layout/inAppLayout";
+import { openDropdown } from "../../utils/dropdown";
+
+//components
 import Card from "../../components/common/card/card";
 import {
   TableBody,
@@ -10,6 +13,10 @@ import {
 import Table from "../../components/table/table";
 import DropdownMenu from "../../components/common/dropdown/dropdown-menu";
 import DropdownOption from "../../components/common/dropdown/dropdown-option";
+import Select from "../../components/common/select/select";
+import Input from "../../components/common/input/input";
+import OutlinedButton from "../../components/common/outlined-button/outlined-button";
+import FillButton from "../../components/common/button/button";
 
 //Icons
 import { ReactComponent as UserIcon } from "./assets/user-card-illustration.svg";
@@ -22,18 +29,6 @@ import { ReactComponent as ViewDetailsIcon } from "../../assets/icons/view.svg";
 import { ReactComponent as ActivateUserIcon } from "../../assets/icons/activate-user.svg";
 
 export default function Users() {
-  const openDropdown = (idx) => {
-    setTimeout(() => {
-      const dropdown = document.querySelector(`.more-option-menu-${idx}`);
-
-      if (!dropdown.classList.contains("open")) {
-        dropdown.classList.add("open");
-      } else {
-        dropdown.classList.remove("open");
-      }
-    }, 50);
-  };
-
   return (
     <InAppLayout>
       <div className="page-content user-page">
@@ -77,8 +72,395 @@ export default function Users() {
               "Status",
             ]}
           />
+          <DropdownMenu className="filter-dropdown">
+            <Select label="Organizations" />
+
+            <Input label="UserName" />
+
+            <Input label="Email" />
+
+            <Input label="Date Joined" />
+
+            <Input label="Phone Number" />
+
+            <Select label="Status" />
+
+            <div className="button-row">
+              <OutlinedButton>Reset</OutlinedButton>
+              <FillButton>Filter</FillButton>
+            </div>
+          </DropdownMenu>
 
           <TableBody>
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(".more-option-menu-1");
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
+            <TableRow>
+              <td>Lendsqr</td>
+              <td>Adedeji</td>
+              <td>Adedeji@lendsqr.com</td>
+              <td>08023456789</td>
+              <td>May 15, 2020 10:00 AM</td>
+              <td>Inactive</td>
+              <td className="more-column">
+                <button
+                  onClick={() => {
+                    openDropdown(1);
+                  }}
+                >
+                  <MoreIcon />
+                </button>
+
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
+                </DropdownMenu>
+              </td>
+            </TableRow>
+
             <TableRow>
               <td>Lendsqr</td>
               <td>Adedeji</td>

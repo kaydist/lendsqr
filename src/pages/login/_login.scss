@@ -85,15 +85,32 @@
 
         .input-field {
           width: 100%;
+          position: relative;
+
+          .input-field-container input {
+            padding: 1rem 1.01rem;
+          }
 
           .input-error {
             color: v.$col-red-800;
             font-size: 0.75rem;
           }
+
+          .password {
+            input {
+              padding-right: 15%;
+            }
+            .password-visibility {
+              position: absolute;
+              top: 50%;
+              right: 0;
+              transform: translateY(-50%);
+            }
+          }
         }
 
         .forgot-password,
-        .input-container span {
+        .input-field span {
           color: v.$primary-color;
           font-size: 0.75rem;
           font-weight: 600;

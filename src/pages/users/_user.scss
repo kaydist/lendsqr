@@ -34,11 +34,42 @@
   }
 
   .users-table {
+    position: relative;
     .more-column {
       width: 1.25rem;
       position: relative;
       button {
         width: 0.25rem;
+      }
+    }
+
+    .filter-dropdown {
+      top: 1.3rem;
+      left: 0;
+      width: 16.875rem;
+      padding: 1.875rem 1.25rem 1.75rem;
+      @include v.flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transform-origin: top left;
+
+      .input-container {
+        width: 100%;
+      }
+
+      .button-row {
+        @include v.flex($justify: space-between);
+        width: 100%;
+        margin-top: 0.625rem;
+
+        .outlined-btn {
+          border: 1px solid v.$col-grey-500;
+          color: v.$col-grey-500;
+          &:hover {
+            background-color: v.$col-grey-500;
+            color: white;
+          }
+        }
       }
     }
   }
