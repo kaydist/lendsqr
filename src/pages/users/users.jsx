@@ -8,6 +8,8 @@ import {
   TableRow,
 } from "../../components/table/table-components";
 import Table from "../../components/table/table";
+import DropdownMenu from "../../components/common/dropdown/dropdown-menu";
+import DropdownOption from "../../components/common/dropdown/dropdown-option";
 
 //Icons
 import { ReactComponent as UserIcon } from "./assets/user-card-illustration.svg";
@@ -15,13 +17,23 @@ import { ReactComponent as ActiveUserIcon } from "./assets/active-user.svg";
 import { ReactComponent as UsersWithLoanIcon } from "./assets/user-with-loan.svg";
 import { ReactComponent as UsersWithSavingsIcon } from "./assets/user-with-savings.svg";
 import { ReactComponent as MoreIcon } from "../../assets/icons/more.svg";
-import DropdownMenu from "../../components/common/dropdown/dropdown-menu";
-import DropdownOption from "../../components/common/dropdown/dropdown-option";
+import { ReactComponent as BlacklistUserIcon } from "../../assets/icons/delete-friend.svg";
+import { ReactComponent as ViewDetailsIcon } from "../../assets/icons/view.svg";
+import { ReactComponent as ActivateUserIcon } from "../../assets/icons/activate-user.svg";
 
 export default function Users() {
   const openDropdown = (idx) => {
-    document.querySelector(".more-option-menu" + idx).classList.toggle("open");
+    setTimeout(() => {
+      const dropdown = document.querySelector(`.more-option-menu-${idx}`);
+
+      if (!dropdown.classList.contains("open")) {
+        dropdown.classList.add("open");
+      } else {
+        dropdown.classList.remove("open");
+      }
+    }, 50);
   };
+
   return (
     <InAppLayout>
       <div className="page-content user-page">
@@ -83,15 +95,30 @@ export default function Users() {
                   <MoreIcon />
                 </button>
 
-                <DropdownMenu className="more-option-menu1">
-                  <DropdownOption>View Details</DropdownOption>
-                  <DropdownOption>Blacklist User</DropdownOption>
-                  <DropdownOption>Activate User</DropdownOption>
+                <DropdownMenu className="more-option-menu-1">
+                  <DropdownOption>
+                    <span className="icon">
+                      <ViewDetailsIcon />
+                    </span>
+                    View Details
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <BlacklistUserIcon />
+                    </span>{" "}
+                    Blacklist User
+                  </DropdownOption>
+
+                  <DropdownOption>
+                    <span className="icon">
+                      <ActivateUserIcon />
+                    </span>
+                    Activate User
+                  </DropdownOption>
                 </DropdownMenu>
               </td>
             </TableRow>
-
-            
           </TableBody>
         </Table>
       </div>

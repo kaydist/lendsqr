@@ -3,7 +3,7 @@
 .card {
   background: #fff;
   border-radius: 0.25rem;
-  box-shadow: 3px 5px 20px 0px #0000000a;
+  box-shadow: v.$card-shadow;
   border: 1px solid;
   border-color: rgba($color: v.$primary-color, $alpha: 0.06);
   padding: 1.875rem;

@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "../common/card/card";
+import Select from "../common/select/select";
 import "./_table.scss";
+import { convertToOptions } from "../../utils/form";
 
 const Table = ({ children, ...rest }) => {
   return (
@@ -13,7 +15,10 @@ const Table = ({ children, ...rest }) => {
         <div className="current-count">
           Showing{" "}
           <span>
-            <button>10</button>
+            <Select
+              options={convertToOptions([10, 25, 50])}
+              defaultValue={convertToOptions([10])}
+            />
           </span>{" "}
           out of 100
         </div>

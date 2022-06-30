@@ -14,8 +14,8 @@
   background-color: #fff;
   background-clip: padding-box;
   border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  -webkit-box-shadow: v.$card-shadow;
+  box-shadow: v.$card-shadow;
   transform: scale(0);
   transform-origin: top right;
   transition: all 0.2s ease-in-out;
@@ -27,12 +27,18 @@
     text-decoration: none;
     border-radius: 0.25rem;
     cursor: pointer;
+
+    .icon {
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
     &:hover {
       background-color: v.$sidebar-active-bg;
     }
   }
 }
 
-.dropdown-menu.open{
-    transform: scale(1);
+.dropdown-menu.open {
+  transform: scale(1);
 }

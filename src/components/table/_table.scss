@@ -39,8 +39,13 @@
 
     .current-count {
       font-size: 0.875rem;
+      @include v.flex($align: center);
       span {
         padding: 0 0.625rem;
+        
+        .react-select__control {
+          background-color: v.$border-color !important;
+        }
       }
     }
   }
