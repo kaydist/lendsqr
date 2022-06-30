@@ -1,0 +1,27 @@
+@use "/src/styles/index.scss" as v;
+
+.pagination {
+  @extend .no-select;
+  list-style-type: none;
+  @include v.flex($align: center);
+  gap: 1.25rem;
+
+  .paginate-button {
+    @include v.flex($align: center, $justify: center);
+    padding: 0.5rem;
+    background-color: v.$border-color;
+    border-radius: v.$card-radius;
+
+    &.next {
+      transform: rotate(180deg);
+    }
+  }
+
+  .paginate-item {
+    opacity: 0.6;
+  }
+
+  .active {
+    opacity: 1;
+  }
+}

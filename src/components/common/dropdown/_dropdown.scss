@@ -25,7 +25,7 @@
     display: block;
     white-space: nowrap;
     text-decoration: none;
-    border-radius: 0.25rem;
+    border-radius: v.$card-radius;
     cursor: pointer;
 
     .icon {

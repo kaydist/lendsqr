@@ -3,6 +3,8 @@ import Card from "../common/card/card";
 import Select from "../common/select/select";
 import "./_table.scss";
 import { convertToOptions } from "../../utils/form";
+import ReactPaginate from "react-paginate";
+import Paginate from "../paginate/paginate";
 
 const Table = ({ children, ...rest }) => {
   return (
@@ -22,7 +24,9 @@ const Table = ({ children, ...rest }) => {
           </span>{" "}
           out of 100
         </div>
-        <div className="pageination-container">Pageination</div>
+        <div className="pageination-container">
+          <Paginate pageCount={50} />
+        </div>
       </div>
     </div>
   );
