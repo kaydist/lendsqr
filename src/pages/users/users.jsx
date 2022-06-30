@@ -118,12 +118,12 @@ export default function Users() {
             {users.map((user) => {
               return (
                 <TableRow key={user?.id}>
-                  <td>{user?.orgName}</td>
-                  <td>{user?.userName}</td>
-                  <td>{user?.email}</td>
-                  <td>{user?.phoneNumber}</td>
-                  <td>{user?.createdAt}</td>
-                  <td>Inactive</td>
+                  <td className="org-col">{user?.orgName}</td>
+                  <td className="name-col">{user?.userName}</td>
+                  <td className="email-col">{user?.email}</td>
+                  <td className="phone-col">{user?.phoneNumber}</td>
+                  <td className="created-col">{user?.createdAt}</td>
+                  <td className="status-col">Inactive</td>
                   <td className="more-column">
                     <button
                       onClick={() => {

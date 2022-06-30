@@ -3,8 +3,17 @@
 .table-container {
   color: v.$col-grey-500;
 
+  .card {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
   table {
     width: 100%;
+    @include v.media("<desktop") {
+      min-width: 1100px;
+    }
+
     text-align: left;
     border-collapse: collapse;
 
@@ -14,7 +23,7 @@
       text-transform: uppercase;
       padding-bottom: 1.875rem;
 
-      .filter-icon{
+      .filter-icon {
         margin-left: 0.625rem;
         height: 1rem;
         width: 1rem;
@@ -36,13 +45,16 @@
   .table-selection-details {
     margin-top: 1.25rem;
     @include v.flex($justify: space-between, $align: center);
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    flex-direction: row-reverse;
 
     .current-count {
       font-size: 0.875rem;
       @include v.flex($align: center);
       span {
         padding: 0 0.625rem;
-        
+
         .react-select__control {
           background-color: v.$border-color !important;
         }

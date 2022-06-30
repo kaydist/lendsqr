@@ -13,6 +13,10 @@ const Table = ({ children, ...rest }) => {
       </Card>
 
       <div className="table-selection-details">
+        <div className="pageination-container">
+          <Paginate pageCount={50} />
+        </div>
+
         <div className="current-count">
           Showing{" "}
           <span>
@@ -22,9 +26,6 @@ const Table = ({ children, ...rest }) => {
             />
           </span>{" "}
           out of 100
-        </div>
-        <div className="pageination-container">
-          <Paginate pageCount={50} />
         </div>
       </div>
     </div>
