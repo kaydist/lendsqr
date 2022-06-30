@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ReactComponent as FilterIcon } from "../../assets/icons/filter.svg";
-import ReactPaginate from "react-paginate";
 import { openDropdown } from "../../utils/dropdown";
 
 const TableHeading = ({ headings, cellClass, ...rest }) => {
@@ -13,15 +12,17 @@ const TableHeading = ({ headings, cellClass, ...rest }) => {
               key={idx}
               className={`table-heading ${cellClass ? cellClass : ``}`}
             >
-              {title}{" "}
-              <span
-                className="filter-icon"
-                onClick={() => {
-                  openDropdown(".filter-dropdown");
-                }}
-              >
-                <FilterIcon />
-              </span>
+              <div>
+                {title}{" "}
+                <span
+                  className="filter-icon"
+                  onClick={() => {
+                    openDropdown(".filter-dropdown");
+                  }}
+                >
+                  <FilterIcon />
+                </span>
+              </div>
             </th>
           );
         })}

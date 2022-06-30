@@ -35,11 +35,20 @@
 
   .users-table {
     position: relative;
-    .more-column {
-      width: 1.5rem;
+
+    .org-col,
+    .name-col,
+    .email-col,
+    .phone-col,
+    .created-col {
+      padding-right: 1.5rem;
+      word-break: break-all;
+    }
+
+    .actions-col {
+      padding: 1.5rem;
       height: 100%;
       position: relative;
-      @include v.flex($align: center, $justify: center);
       button {
         width: 0.25rem;
       }

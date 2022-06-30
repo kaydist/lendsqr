@@ -30,17 +30,17 @@
     min-height: 100vh;
     margin-left: v.$sidebar-width;
     padding: (v.$topbar-height + v.$body-padding-desktop)
-      v.$body-padding-desktop;
+      v.$body-padding-desktop 3rem;
 
     @include v.media("<desktop") {
       margin-left: 0;
-      padding: (v.$topbar-height + v.$body-padding-tablet)
-        v.$body-padding-tablet;
+      padding: (v.$topbar-height + v.$body-padding-tablet + 1rem)
+        v.$body-padding-tablet 2rem;
     }
     @include v.media("<desktop") {
       margin-left: 0;
-      padding: (v.$topbar-height + v.$body-padding-mobile)
-        v.$body-padding-mobile;
+      padding: (v.$topbar-height + v.$body-padding-mobile + 1rem)
+        v.$body-padding-mobile 2rem;
     }
   }
 }

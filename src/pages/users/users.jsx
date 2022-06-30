@@ -124,7 +124,7 @@ export default function Users() {
                   <td className="phone-col">{user?.phoneNumber}</td>
                   <td className="created-col">{user?.createdAt}</td>
                   <td className="status-col">Inactive</td>
-                  <td className="more-column">
+                  <td className="actions-col">
                     <button
                       onClick={() => {
                         openDropdown(`.more-option-menu-${user?.id}`);

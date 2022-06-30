@@ -24,10 +24,14 @@
       text-transform: uppercase;
       padding-bottom: 1.875rem;
 
+      div {
+        @include v.flex;
+      }
+
       .filter-icon {
-        margin-left: 0.625rem;
-        height: 1rem;
+        margin-left: 0.425rem;
         width: 1rem;
+        display: inline-block;
         cursor: pointer;
       }
     }
