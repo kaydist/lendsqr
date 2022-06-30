@@ -5,6 +5,8 @@ $section-spacing: 1.875rem;
 .user-details-page {
   .page-heading {
     @include v.flex($align: center, $justify: space-between);
+    flex-wrap: wrap;
+    gap: 0.625rem;
 
     .button-row {
       @include v.flex($align: center, $justify: center);
@@ -108,7 +110,7 @@ $section-spacing: 1.875rem;
         min-width: 650px;
 
         .react-tabs__tab {
-          padding: 0.675rem 0;
+          padding: 0.675rem 1.25rem;
           color: #00000080;
           cursor: pointer;
           transition: all 0.2s ease-in-out;
@@ -148,7 +150,7 @@ $section-spacing: 1.875rem;
         grid-template-columns: repeat(5, 1fr);
         gap: $section-spacing;
         @include v.media("<tablet") {
-          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
 
         .detail-field {
@@ -160,6 +162,16 @@ $section-spacing: 1.875rem;
             font-size: 0.75rem;
             font-weight: 400;
             color: v.$col-grey-500;
+            text-transform: uppercase;
+          }
+        }
+      }
+
+      &.employment {
+        .detail-row {
+          grid-template-columns: repeat(4, 1fr);
+          @include v.media("<tablet") {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
           }
         }
       }

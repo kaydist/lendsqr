@@ -2,6 +2,7 @@ import React from "react";
 import "./_user.scss";
 import InAppLayout from "../../layout/inAppLayout";
 import { openDropdown } from "../../utils/dropdown";
+import { useNavigate } from "react-router-dom";
 
 //components
 import Card from "../../components/common/card/card";
@@ -31,7 +32,25 @@ import { useEffect } from "react";
 import axios from "axios";
 
 export default function Users() {
+  const navigate = useNavigate();
+  const [users, setUsers] = React.useState([]);
 
+  useEffect(() => {
+    axios
+      .get("https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users")
+      .then((res) => {
+        setUsers(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const gotoUserDetails = (user) => {
+    console.log(user);
+    navigate(`/users/${user}`, { replace: true });
+  };
 
   return (
     <InAppLayout>
@@ -96,46 +115,54 @@ export default function Users() {
           </DropdownMenu>
 
           <TableBody>
-            <TableRow>
-              <td>Lendsqr</td>
-              <td>Adedeji</td>
-              <td>Adedeji@lendsqr.com</td>
-              <td>08023456789</td>
-              <td>May 15, 2020 10:00 AM</td>
-              <td>Inactive</td>
-              <td className="more-column">
-                <button
-                  onClick={() => {
-                    openDropdown(".more-option-menu-1");
-                  }}
-                >
-                  <MoreIcon />
-                </button>
+            {users.map((user) => {
+              return (
+                <TableRow key={user?.id}>
+                  <td>{user?.orgName}</td>
+                  <td>{user?.userName}</td>
+                  <td>{user?.email}</td>
+                  <td>{user?.phoneNumber}</td>
+                  <td>{user?.createdAt}</td>
+                  <td>Inactive</td>
+                  <td className="more-column">
+                    <button
+                      onClick={() => {
+                        openDropdown(`.more-option-menu-${user?.id}`);
+                      }}
+                    >
+                      <MoreIcon />
+                    </button>
 
-                <DropdownMenu className="more-option-menu-1">
-                  <DropdownOption>
-                    <span className="icon">
-                      <ViewDetailsIcon />
-                    </span>
-                    View Details
-                  </DropdownOption>
+                    <DropdownMenu className={`more-option-menu-${user?.id}`}>
+                      <DropdownOption
+                        onClick={() => {
+                          gotoUserDetails(user?.id);
+                        }}
+                      >
+                        <span className="icon">
+                          <ViewDetailsIcon />
+                        </span>
+                        View Details
+                      </DropdownOption>
 
-                  <DropdownOption>
-                    <span className="icon">
-                      <BlacklistUserIcon />
-                    </span>{" "}
-                    Blacklist User
-                  </DropdownOption>
+                      <DropdownOption>
+                        <span className="icon">
+                          <BlacklistUserIcon />
+                        </span>{" "}
+                        Blacklist User
+                      </DropdownOption>
 
-                  <DropdownOption>
-                    <span className="icon">
-                      <ActivateUserIcon />
-                    </span>
-                    Activate User
-                  </DropdownOption>
-                </DropdownMenu>
-              </td>
-            </TableRow>
+                      <DropdownOption>
+                        <span className="icon">
+                          <ActivateUserIcon />
+                        </span>
+                        Activate User
+                      </DropdownOption>
+                    </DropdownMenu>
+                  </td>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>

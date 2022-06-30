@@ -3,7 +3,6 @@ import Card from "../common/card/card";
 import Select from "../common/select/select";
 import "./_table.scss";
 import { convertToOptions } from "../../utils/form";
-import ReactPaginate from "react-paginate";
 import Paginate from "../paginate/paginate";
 
 const Table = ({ children, ...rest }) => {
