@@ -5,6 +5,7 @@
 
   .card {
     overflow-x: auto;
+    overflow-y: clip;
     max-width: 100%;
   }
 

@@ -44,7 +44,7 @@ $section-spacing: 1.875rem;
       .avater {
         @include v.flex($align: center, $justify: center);
         width: 6.25rem;
-        height: 6.25rem;
+        height: auto;
         border-radius: 50%;
         overflow: hidden;
         background: rgba(v.$col-blue-800, $alpha: 0.16);
@@ -59,6 +59,7 @@ $section-spacing: 1.875rem;
         h2 {
           font-size: 1.375rem;
           font-weight: 500;
+          word-break: break-all;
         }
 
         p {
@@ -107,7 +108,7 @@ $section-spacing: 1.875rem;
       .react-tabs__tab-list {
         list-style-type: none;
         @include v.flex($align: center, $justify: space-between);
-        min-width: 650px;
+        min-width: 800px;
 
         .react-tabs__tab {
           padding: 0.675rem 1.25rem;

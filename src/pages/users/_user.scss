@@ -9,7 +9,7 @@
       grid-template-columns: repeat(2, 1fr);
     }
     @include v.media("<tablet") {
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     gap: 1.625rem;
 
@@ -42,6 +42,19 @@
       @include v.flex($align: center, $justify: center);
       button {
         width: 0.25rem;
+      }
+    }
+
+    .table-row {
+      .dropdown-menu {
+        top: 20%;
+      }
+
+      &:last-of-type {
+        .dropdown-menu {
+          top: auto;
+          bottom: 0;
+        }
       }
     }
 
