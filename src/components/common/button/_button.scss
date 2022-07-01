@@ -12,4 +12,8 @@
   background-color: variable.$primary-color;
   color: white;
   transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: darken($color: variable.$primary-color, $amount: 10);
+  }
 }

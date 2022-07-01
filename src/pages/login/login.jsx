@@ -9,8 +9,10 @@ import Input from "../../components/common/input/input";
 //icons
 import { ReactComponent as Logo } from "../../assets/brand/logo.svg";
 import SignInIllustration from "../../assets/brand/sign-in-illustration.png";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   return (
@@ -52,7 +54,7 @@ export default function LoginPage() {
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
+                navigate("/users");
                 setSubmitting(false);
               }, 400);
             }}

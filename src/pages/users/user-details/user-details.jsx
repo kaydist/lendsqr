@@ -60,7 +60,6 @@ export default function UserDetailsPage() {
       const getAll = store.get(Number(userId));
       getAll.onsuccess = function (event) {
         setUserInfo(event.target.result);
-        console.log(event.target.result);
       };
 
       getAll.onerror = function (event) {

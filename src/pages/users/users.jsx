@@ -31,18 +31,29 @@ import { ReactComponent as ActivateUserIcon } from "../../assets/icons/activate-
 import { useEffect } from "react";
 
 import { users } from "../../dummy-data";
+import { convertToOptions } from "../../utils/form";
 
 export default function Users() {
   const navigate = useNavigate();
   const [usersList, setUsersList] = React.useState([]);
+  const [filter, setFilter] = React.useState({
+    status: "",
+    userName: "",
+    email: "",
+    phoneNumber: "",
+    orgName: "",
+    createdAt: "",
+  });
+
+  const indexedDb =
+    window.indexedDB ||
+    window.mozIndexedDB ||
+    window.webkitIndexedDB ||
+    window.msIndexedDB;
+
+  var db = null;
 
   useEffect(() => {
-    const indexedDb =
-      window.indexedDB ||
-      window.mozIndexedDB ||
-      window.webkitIndexedDB ||
-      window.msIndexedDB;
-
     const request = indexedDb.open("users", 1);
 
     request.onerror = function (event) {
@@ -70,7 +81,7 @@ export default function Users() {
     };
 
     request.onsuccess = function (event) {
-      const db = event.target.result;
+      db = event.target.result;
       const transaction = db.transaction("users", "readwrite");
       const objectStore = transaction.objectStore("users");
 
@@ -105,6 +116,71 @@ export default function Users() {
   const gotoUserDetails = (user) => {
     navigate(`/users/${user}`, { replace: true });
   };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    const { name } = e.target;
+
+    setFilter((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSelect = (name, val) => {
+    if (val) {
+      setFilter((prevState) => ({
+        ...prevState,
+        [name]: val.value,
+      }));
+    }
+  };
+
+  const handleFilterSubmit = (e) => {
+    e.preventDefault();
+
+    const request = indexedDb.open("users", 1);
+
+    request.onerror = function (event) {
+      console.log("Error opening database");
+    };
+
+    request.onsuccess = function (event) {
+      db = event.target.result;
+      const transaction = db.transaction("users", "readwrite");
+      const objectStore = transaction.objectStore("users");
+      const cursorRequest = objectStore.openCursor();
+
+      cursorRequest.onsuccess = (e) => {
+        const cursor = e.target.result;
+        if (cursor) {
+          const user = cursor.value;
+          if (
+            user.userName
+              .toLowerCase()
+              .includes(filter.userName.toLowerCase()) &&
+            user.email.toLowerCase().includes(filter.email.toLowerCase()) &&
+            user.phoneNumber
+              .toLowerCase()
+              .includes(filter.phoneNumber.toLowerCase()) &&
+            user.createdAt
+              .toLowerCase()
+              .includes(filter.createdAt.toLowerCase()) &&
+            user.orgName.toLowerCase().includes(filter.orgName.toLowerCase()) &&
+            user.status.toLowerCase().includes(filter.status.toLowerCase())
+          ) {
+            const response = cursor.value;
+            console.log(response);
+          }
+          cursor.continue();
+        }
+      };
+    };
+  };
+
+  const allOrg = usersList.map((user) => user.orgName);
+
+  const allOrgName = Array.from(new Set(allOrg));
 
   return (
     <InAppLayout>
@@ -150,22 +226,71 @@ export default function Users() {
             ]}
           />
           <DropdownMenu className="filter-dropdown">
-            <Select label="Organizations" />
+            <form
+              onSubmit={(e) => {
+                handleFilterSubmit(e);
+              }}
+            >
+              <Select
+                onChange={(val) => {
+                  handleSelect("orgName", val);
+                }}
+                label="Organizations"
+                name="orgName"
+                options={convertToOptions(allOrgName, "orgName")}
+              />
 
-            <Input label="UserName" />
+              <Input
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                label="UserName"
+                name="userName"
+              />
 
-            <Input label="Email" />
+              <Input
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                label="Email"
+                name="email"
+              />
 
-            <Input label="Date Joined" />
+              <Input
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                label="Date Joined"
+                name="createdAt"
+              />
 
-            <Input label="Phone Number" />
+              <Input
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+                label="Phone Number"
+                name="phoneNumber"
+              />
 
-            <Select label="Status" />
+              <Select
+                onChange={(val) => {
+                  handleSelect("status", val);
+                }}
+                label="Status"
+                name="status"
+                options={convertToOptions([
+                  "inactive",
+                  "blacklisted",
+                  "active",
+                  "pending",
+                ])}
+              />
 
-            <div className="button-row">
-              <OutlinedButton>Reset</OutlinedButton>
-              <FillButton>Filter</FillButton>
-            </div>
+              <div className="button-row">
+                <OutlinedButton>Reset</OutlinedButton>
+                <FillButton type="submit">Filter</FillButton>
+              </div>
+            </form>
           </DropdownMenu>
 
           <TableBody>

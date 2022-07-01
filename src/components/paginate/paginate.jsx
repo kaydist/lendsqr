@@ -13,6 +13,56 @@ export default function Paginate({ pageCount }) {
     setCurrentPage(Math.round(event.selected));
     scrollToTop();
   };
+  const indexedDb =
+    window.indexedDB ||
+    window.mozIndexedDB ||
+    window.webkitIndexedDB ||
+    window.msIndexedDB;
+
+  var db = null;
+  var request = indexedDb.open("users", 1);
+  request.onerror = function (event) {
+    console.log("Error opening database");
+  };
+  request.onsuccess = function (event) {
+    db = event.target.result;
+  };
+  var counter = 0;
+  var limit = 10;
+
+  const nextPage = () => {
+    var advanced = false;
+    db
+      .transaction("users", "readwrite")
+      .objectStore("users")
+      .openCursor().onsuccess = function (event) {
+      var cursor = event.target.result;
+
+      if (!cursor) {
+        return;
+      }
+
+      if (!advanced) {
+        advanced = true;
+        cursor.advance(10);
+        return;
+      }
+
+      // var value = cursor.value;
+
+      if (cursor) {
+        var value = cursor.value;
+
+        console.log(value);
+        counter++;
+        if (counter < limit) {
+          cursor.continue();
+        }
+      }
+
+      // ...
+    };
+  };
 
   return (
     <ReactPaginate
@@ -22,7 +72,12 @@ export default function Paginate({ pageCount }) {
         handlePageClick(event);
       }}
       nextLabel={
-        <button className="paginate-button next">
+        <button
+          className="paginate-button next"
+          onClick={() => {
+            nextPage();
+          }}
+        >
           <NextIcon />
         </button>
       }
