@@ -9,10 +9,6 @@ import { ReactComponent as NextIcon } from "../../assets/icons/next.svg";
 export default function Paginate({ pageCount }) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handlePageClick = (event) => {
-    setCurrentPage(Math.round(event.selected));
-    scrollToTop();
-  };
   const indexedDb =
     window.indexedDB ||
     window.mozIndexedDB ||
@@ -30,7 +26,13 @@ export default function Paginate({ pageCount }) {
   var counter = 0;
   var limit = 10;
 
-  const nextPage = () => {
+  const handlePageClick = (event) => {
+    setCurrentPage(Math.round(event.selected));
+    scrollToTop();
+    nextPage(Math.round(event.selected));
+  };
+
+  const nextPage = (pageNo) => {
     var advanced = false;
     db
       .transaction("users", "readwrite")
@@ -44,7 +46,7 @@ export default function Paginate({ pageCount }) {
 
       if (!advanced) {
         advanced = true;
-        cursor.advance(10);
+        cursor.advance((pageNo + 1) * limit);
         return;
       }
 
