@@ -14,27 +14,63 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { ReactComponent as DefaultAvater } from "../../../assets/icons/user.svg";
 import GeneralInfo from "./general-info-tab";
 
-import { users } from "../../../dummy-data";
-
 export default function UserDetailsPage() {
-  const [userInfo, setUserInfo] = useState(users[1]);
+  const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
-    let userId = null;
-    if (window.location.pathname.split("/").length > 2) {
-      userId = window.location.pathname.split("/")[2];
-    }
-    // axios
-    //   .get(
-    //     `https://6270020422c706a0ae70b72c.mockapi.io/lendsqr/api/v1/users/${userId}`
-    //   )
-    //   .then((res) => {
-    //     setUserInfo(res.data);
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    let userId = window.location.pathname.split("/")[2];
+
+    const indexedDb =
+      window.indexedDB ||
+      window.mozIndexedDB ||
+      window.webkitIndexedDB ||
+      window.msIndexedDB;
+
+    const request = indexedDb.open("users", 1);
+
+    request.onerror = function (event) {
+      console.log("Error opening database");
+    };
+
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result;
+      const store = db.createObjectStore("users", {
+        keyPath: "id",
+      });
+      store.createIndex(
+        "all_users",
+        [
+          "id",
+          "orgName",
+          "userName",
+          "phoneNumber",
+          "email",
+          "createdAt",
+          "status",
+        ],
+        { unique: true }
+      );
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const transaction = db.transaction("users", "readonly");
+      const store = transaction.objectStore("users");
+
+      const getAll = store.get(Number(userId));
+      getAll.onsuccess = function (event) {
+        setUserInfo(event.target.result);
+        console.log(event.target.result);
+      };
+
+      getAll.onerror = function (event) {
+        console.log("Error getting data");
+      };
+
+      transaction.oncomplete = function (event) {
+        db.close();
+      };
+    };
   }, []);
 
   return (

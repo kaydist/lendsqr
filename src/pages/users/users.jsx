@@ -29,23 +29,77 @@ import { ReactComponent as BlacklistUserIcon } from "../../assets/icons/delete-f
 import { ReactComponent as ViewDetailsIcon } from "../../assets/icons/view.svg";
 import { ReactComponent as ActivateUserIcon } from "../../assets/icons/activate-user.svg";
 import { useEffect } from "react";
-import axios from "axios";
+
 import { users } from "../../dummy-data";
 
 export default function Users() {
   const navigate = useNavigate();
-  // const [users, setUsers] = React.useState([]);
+  const [usersList, setUsersList] = React.useState([]);
 
   useEffect(() => {
-    // axios
-    //   .get("../../dummy-data")
-    //   .then((res) => {
-    //     setUsers(res.data);
-    //     console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    const indexedDb =
+      window.indexedDB ||
+      window.mozIndexedDB ||
+      window.webkitIndexedDB ||
+      window.msIndexedDB;
+
+    const request = indexedDb.open("users", 1);
+
+    request.onerror = function (event) {
+      console.log("Error opening database");
+    };
+
+    request.onupgradeneeded = function (event) {
+      const db = event.target.result;
+      const store = db.createObjectStore("users", {
+        keyPath: "id",
+      });
+      store.createIndex(
+        "all_users",
+        [
+          "id",
+          "orgName",
+          "userName",
+          "phoneNumber",
+          "email",
+          "createdAt",
+          "status",
+        ],
+        { unique: true }
+      );
+    };
+
+    request.onsuccess = function (event) {
+      const db = event.target.result;
+      const transaction = db.transaction("users", "readwrite");
+      const objectStore = transaction.objectStore("users");
+
+      users.forEach((user) => {
+        const request = objectStore.put(user);
+        request.onerror = function (event) {
+          console.log("Error getting data");
+        };
+      });
+
+      var counter = 0;
+      var limit = 10;
+      db.transaction("users").objectStore("users").openCursor().onsuccess =
+        function (event) {
+          var cursor = event.target.result;
+          if (cursor) {
+            var value = cursor.value;
+            setUsersList((prevState) => [...prevState, value]);
+            counter++;
+            if (counter < limit) {
+              cursor.continue();
+            }
+          }
+        };
+
+      transaction.oncomplete = function (event) {
+        db.close();
+      };
+    };
   }, []);
 
   const gotoUserDetails = (user) => {
@@ -115,55 +169,58 @@ export default function Users() {
           </DropdownMenu>
 
           <TableBody>
-            {users.map((user) => {
-              return (
-                <TableRow key={user?.id}>
-                  <td className="org-col">{user?.orgName}</td>
-                  <td className="name-col">{user?.userName}</td>
-                  <td className="email-col">{user?.email}</td>
-                  <td className="phone-col">{user?.phoneNumber}</td>
-                  <td className="created-col">{user?.createdAt}</td>
-                  <td className="status-col">
-                    <span>{user?.status}</span></td>
-                  <td className="actions-col">
-                    <button
-                      onClick={() => {
-                        openDropdown(`.more-option-menu-${user?.id}`);
-                      }}
-                    >
-                      <MoreIcon />
-                    </button>
-
-                    <DropdownMenu className={`more-option-menu-${user?.id}`}>
-                      <DropdownOption
+            {usersList
+              .filter((user, idx) => idx < 10)
+              .map((user) => {
+                return (
+                  <TableRow key={user?.id}>
+                    <td className="org-col">{user?.orgName}</td>
+                    <td className="name-col">{user?.userName}</td>
+                    <td className="email-col">{user?.email}</td>
+                    <td className="phone-col">{user?.phoneNumber}</td>
+                    <td className="created-col">{user?.createdAt}</td>
+                    <td className="status-col">
+                      <span>{user?.status}</span>
+                    </td>
+                    <td className="actions-col">
+                      <button
                         onClick={() => {
-                          gotoUserDetails(user?.id);
+                          openDropdown(`.more-option-menu-${user?.id}`);
                         }}
                       >
-                        <span className="icon">
-                          <ViewDetailsIcon />
-                        </span>
-                        View Details
-                      </DropdownOption>
+                        <MoreIcon />
+                      </button>
 
-                      <DropdownOption>
-                        <span className="icon">
-                          <BlacklistUserIcon />
-                        </span>{" "}
-                        Blacklist User
-                      </DropdownOption>
+                      <DropdownMenu className={`more-option-menu-${user?.id}`}>
+                        <DropdownOption
+                          onClick={() => {
+                            gotoUserDetails(user?.id);
+                          }}
+                        >
+                          <span className="icon">
+                            <ViewDetailsIcon />
+                          </span>
+                          View Details
+                        </DropdownOption>
 
-                      <DropdownOption>
-                        <span className="icon">
-                          <ActivateUserIcon />
-                        </span>
-                        Activate User
-                      </DropdownOption>
-                    </DropdownMenu>
-                  </td>
-                </TableRow>
-              );
-            })}
+                        <DropdownOption>
+                          <span className="icon">
+                            <BlacklistUserIcon />
+                          </span>{" "}
+                          Blacklist User
+                        </DropdownOption>
+
+                        <DropdownOption>
+                          <span className="icon">
+                            <ActivateUserIcon />
+                          </span>
+                          Activate User
+                        </DropdownOption>
+                      </DropdownMenu>
+                    </td>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </div>
