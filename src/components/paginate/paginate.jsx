@@ -6,7 +6,7 @@ import { scrollToTop } from "../../utils/helper";
 //icons
 import { ReactComponent as NextIcon } from "../../assets/icons/next.svg";
 
-export default function Paginate({ pageCount }) {
+export default function Paginate({ pageCount, changeData }) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexedDb =
@@ -54,8 +54,7 @@ export default function Paginate({ pageCount }) {
 
       if (cursor) {
         var value = cursor.value;
-
-        console.log(value);
+        changeData(value);
         counter++;
         if (counter < limit) {
           cursor.continue();

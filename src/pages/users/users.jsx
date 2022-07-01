@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./_user.scss";
 import InAppLayout from "../../layout/inAppLayout";
 import { openDropdown } from "../../utils/dropdown";
@@ -32,18 +32,30 @@ import { useEffect } from "react";
 
 import { users } from "../../dummy-data";
 import { convertToOptions } from "../../utils/form";
+import { UsersListContext } from "../../controller/users-context";
 
 export default function Users() {
   const navigate = useNavigate();
-  const [usersList, setUsersList] = React.useState([]);
-  const [filter, setFilter] = React.useState({
+  const {
+    usersList,
+    setUsersList,
+    perPage,
+    setPerPage,
+    currentPage,
+    setCurrentPage,
+    totalCount,
+  } = useContext(UsersListContext);
+
+  const initialFilterState = {
     status: "",
     userName: "",
     email: "",
     phoneNumber: "",
     orgName: "",
     createdAt: "",
-  });
+  };
+
+  const [filter, setFilter] = React.useState(initialFilterState);
 
   const indexedDb =
     window.indexedDB ||
@@ -93,7 +105,6 @@ export default function Users() {
       });
 
       var counter = 0;
-      var limit = 10;
       db.transaction("users").objectStore("users").openCursor().onsuccess =
         function (event) {
           var cursor = event.target.result;
@@ -101,7 +112,7 @@ export default function Users() {
             var value = cursor.value;
             setUsersList((prevState) => [...prevState, value]);
             counter++;
-            if (counter < limit) {
+            if (counter < perPage) {
               cursor.continue();
             }
           }
@@ -170,7 +181,7 @@ export default function Users() {
             user.status.toLowerCase().includes(filter.status.toLowerCase())
           ) {
             const response = cursor.value;
-            console.log(response);
+            setUsersList((prevState) => [...prevState, response]);
           }
           cursor.continue();
         }
@@ -178,7 +189,12 @@ export default function Users() {
     };
   };
 
-  const allOrg = usersList.map((user) => user.orgName);
+  const handleReset = (e) => {
+    e.preventDefault();
+    setFilter(initialFilterState);
+  };
+
+  const allOrg = usersList?.map((user) => user?.orgName);
 
   const allOrgName = Array.from(new Set(allOrg));
 
@@ -214,7 +230,20 @@ export default function Users() {
           })}
         </div>
 
-        <Table className="users-table">
+        <Table
+          className="users-table"
+          tableProps={{
+            setPerPage,
+            perPage,
+            setCurrentPage,
+            currentPage,
+            totalCount,
+          }}
+          changeData={(data) => {
+            console.log(data);
+            // setUsersList(data);
+          }}
+        >
           <TableHeading
             headings={[
               "Organizations",
@@ -246,6 +275,7 @@ export default function Users() {
                 }}
                 label="UserName"
                 name="userName"
+                value={filter?.userName}
               />
 
               <Input
@@ -254,6 +284,7 @@ export default function Users() {
                 }}
                 label="Email"
                 name="email"
+                value={filter?.email}
               />
 
               <Input
@@ -262,6 +293,7 @@ export default function Users() {
                 }}
                 label="Date Joined"
                 name="createdAt"
+                value={filter?.createdAt}
               />
 
               <Input
@@ -270,6 +302,7 @@ export default function Users() {
                 }}
                 label="Phone Number"
                 name="phoneNumber"
+                value={filter?.phoneNumber}
               />
 
               <Select
@@ -287,7 +320,14 @@ export default function Users() {
               />
 
               <div className="button-row">
-                <OutlinedButton>Reset</OutlinedButton>
+                <OutlinedButton
+                  onClick={(e) => {
+                    handleReset(e);
+                  }}
+                >
+                  Reset
+                </OutlinedButton>
+
                 <FillButton type="submit">Filter</FillButton>
               </div>
             </form>
@@ -295,7 +335,7 @@ export default function Users() {
 
           <TableBody>
             {usersList
-              .filter((user, idx) => idx < 10)
+              .filter((user, idx) => idx < perPage)
               .map((user) => {
                 return (
                   <TableRow key={user?.id}>

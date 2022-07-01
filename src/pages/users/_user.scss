@@ -72,10 +72,13 @@
       left: 0;
       width: 16.875rem;
       padding: 1.875rem 1.25rem 1.75rem;
-      @include v.flex;
-      flex-direction: column;
-      gap: 1.25rem;
       transform-origin: top left;
+
+      form {
+        @include v.flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
 
       .input-container {
         width: 100%;

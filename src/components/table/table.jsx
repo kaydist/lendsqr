@@ -5,7 +5,15 @@ import "./_table.scss";
 import { convertToOptions } from "../../utils/form";
 import Paginate from "../paginate/paginate";
 
-const Table = ({ children, ...rest }) => {
+const Table = ({ children, tableProps, changeData, ...rest }) => {
+  const { setPerPage, setCurrentPage, currentPage, totalCount, perPage } =
+    tableProps || {};
+
+  const handlePerPageChange = (val) => {
+    if (val) {
+      setPerPage(val);
+    }
+  };
   return (
     <div className="table-container">
       <Card>
@@ -14,7 +22,7 @@ const Table = ({ children, ...rest }) => {
 
       <div className="table-selection-details">
         <div className="pageination-container">
-          <Paginate pageCount={50} />
+          <Paginate changeData={changeData} pageCount={Math.ceil(totalCount / perPage)} />
         </div>
 
         <div className="current-count">
@@ -23,6 +31,9 @@ const Table = ({ children, ...rest }) => {
             <Select
               options={convertToOptions([10, 25, 50])}
               defaultValue={convertToOptions([10])}
+              onChange={(val) => {
+                handlePerPageChange(val);
+              }}
             />
           </span>{" "}
           out of 100
