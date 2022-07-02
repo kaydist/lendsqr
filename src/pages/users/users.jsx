@@ -343,7 +343,6 @@ export default function Users() {
                     <td className="phone-col">{user?.phoneNumber}</td>
                     <td className="created-col">{user?.createdAt}</td>
                     <td className="status-col">
-                      {/* <span>{user?.status}</span> */}
                       <span
                         className={`status-label ${
                           user?.status === "active"
