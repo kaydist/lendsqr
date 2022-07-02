@@ -55,6 +55,30 @@
     }
 
     .table-row {
+      .status-label{
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        border-radius: 20rem;
+        padding: 0.5rem 0.875rem;
+
+        &.active {
+          color: v.$success;
+          background-color: rgba(v.$success, $alpha: 0.1);
+        }
+        &.inactive {
+          color: v.$inactive;
+          background-color: rgba(v.$inactive, $alpha: 0.1);
+        }
+        &.pending {
+          color: v.$warning;
+          background-color: rgba(v.$warning, $alpha: 0.1);
+        }
+        &.blacklisted {
+          color: v.$danger;
+          background-color: rgba(v.$danger, $alpha: 0.1);
+        }
+      }
       .dropdown-menu {
         top: 20%;
       }

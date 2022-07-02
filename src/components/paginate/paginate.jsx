@@ -54,7 +54,7 @@ export default function Paginate({ pageCount, changeData }) {
 
       if (cursor) {
         var value = cursor.value;
-        changeData(value);
+        console.log(value)
         counter++;
         if (counter < limit) {
           cursor.continue();

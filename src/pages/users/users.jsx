@@ -30,7 +30,7 @@ import { ReactComponent as ViewDetailsIcon } from "../../assets/icons/view.svg";
 import { ReactComponent as ActivateUserIcon } from "../../assets/icons/activate-user.svg";
 import { useEffect } from "react";
 
-import { users } from "../../dummy-data";
+import { UsersData } from "../../dummy-data";
 import { convertToOptions } from "../../utils/form";
 import { UsersListContext } from "../../controller/users-context";
 
@@ -57,16 +57,14 @@ export default function Users() {
 
   const [filter, setFilter] = React.useState(initialFilterState);
 
-  const indexedDb =
+  var indexedDb =
     window.indexedDB ||
     window.mozIndexedDB ||
     window.webkitIndexedDB ||
     window.msIndexedDB;
 
-  var db = null;
-
   useEffect(() => {
-    const request = indexedDb.open("users", 1);
+    const request = indexedDb.open("usersDB", 1);
 
     request.onerror = function (event) {
       console.log("Error opening database");
@@ -74,7 +72,7 @@ export default function Users() {
 
     request.onupgradeneeded = function (event) {
       const db = event.target.result;
-      const store = db.createObjectStore("users", {
+      const store = db.createObjectStore("usersDB", {
         keyPath: "id",
       });
       store.createIndex(
@@ -93,19 +91,19 @@ export default function Users() {
     };
 
     request.onsuccess = function (event) {
-      db = event.target.result;
-      const transaction = db.transaction("users", "readwrite");
-      const objectStore = transaction.objectStore("users");
+      const db = event.target.result;
+      const transaction = db.transaction("usersDB", "readwrite");
+      const objectStore = transaction.objectStore("usersDB");
 
-      users.forEach((user) => {
-        const request = objectStore.put(user);
-        request.onerror = function (event) {
+      UsersData.forEach((user) => {
+        const saveInStore = objectStore.put(user);
+        saveInStore.onerror = function (event) {
           console.log("Error getting data");
         };
       });
 
       var counter = 0;
-      db.transaction("users").objectStore("users").openCursor().onsuccess =
+      db.transaction("usersDB").objectStore("usersDB").openCursor().onsuccess =
         function (event) {
           var cursor = event.target.result;
           if (cursor) {
@@ -150,16 +148,16 @@ export default function Users() {
   const handleFilterSubmit = (e) => {
     e.preventDefault();
 
-    const request = indexedDb.open("users", 1);
+    const request = indexedDb.open("usersDB", 1);
 
     request.onerror = function (event) {
       console.log("Error opening database");
     };
 
     request.onsuccess = function (event) {
-      db = event.target.result;
-      const transaction = db.transaction("users", "readwrite");
-      const objectStore = transaction.objectStore("users");
+      const db = event.target.result;
+      const transaction = db.transaction("usersDB", "readwrite");
+      const objectStore = transaction.objectStore("usersDB");
       const cursorRequest = objectStore.openCursor();
 
       cursorRequest.onsuccess = (e) => {
@@ -207,7 +205,7 @@ export default function Users() {
 
         <div className="analytics-card-row">
           {[
-            { icon: <UserIcon />, label: "users", value: "2,453" },
+            { icon: <UserIcon />, label: "usersDB", value: "2,453" },
             { icon: <ActiveUserIcon />, label: "Active Users", value: "2,453" },
             {
               icon: <UsersWithLoanIcon />,
@@ -345,7 +343,22 @@ export default function Users() {
                     <td className="phone-col">{user?.phoneNumber}</td>
                     <td className="created-col">{user?.createdAt}</td>
                     <td className="status-col">
-                      <span>{user?.status}</span>
+                      {/* <span>{user?.status}</span> */}
+                      <span
+                        className={`status-label ${
+                          user?.status === "active"
+                            ? "active"
+                            : user?.status === "inactive"
+                            ? "inactive"
+                            : user?.status === "blacklisted"
+                            ? "blacklisted"
+                            : user?.status === "pending"
+                            ? "pending"
+                            : ``
+                        }`}
+                      >
+                        {user?.status}
+                      </span>
                     </td>
                     <td className="actions-col">
                       <button

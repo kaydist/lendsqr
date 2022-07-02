@@ -26,36 +26,16 @@ export default function UserDetailsPage() {
       window.webkitIndexedDB ||
       window.msIndexedDB;
 
-    const request = indexedDb.open("users", 1);
+    const request = indexedDb.open("usersDB", 1);
 
     request.onerror = function (event) {
       console.log("Error opening database");
     };
 
-    request.onupgradeneeded = function (event) {
-      const db = event.target.result;
-      const store = db.createObjectStore("users", {
-        keyPath: "id",
-      });
-      store.createIndex(
-        "all_users",
-        [
-          "id",
-          "orgName",
-          "userName",
-          "phoneNumber",
-          "email",
-          "createdAt",
-          "status",
-        ],
-        { unique: true }
-      );
-    };
-
     request.onsuccess = function (event) {
       const db = event.target.result;
-      const transaction = db.transaction("users", "readonly");
-      const store = transaction.objectStore("users");
+      const transaction = db.transaction("usersDB", "readonly");
+      const store = transaction.objectStore("usersDB");
 
       const getAll = store.get(Number(userId));
       getAll.onsuccess = function (event) {
