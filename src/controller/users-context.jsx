@@ -15,10 +15,6 @@ function UsersListController({ children }) {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [totalCount, setTotalCount] = React.useState(0);
 
-  useEffect(() => {
-    setTotalCount(usersList.length);
-  }, [usersList]);
-
   return (
     <UsersListContext.Provider
       value={{
@@ -29,6 +25,7 @@ function UsersListController({ children }) {
         currentPage,
         setCurrentPage,
         totalCount,
+        setTotalCount,
       }}
     >
       {children}

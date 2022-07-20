@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./_user-details.scss";
-import axios from "axios";
+import { scrollToTop } from "../../../utils/helper";
 import InAppLayout from "../../../layout/inAppLayout";
 
 //components
@@ -18,6 +18,7 @@ export default function UserDetailsPage() {
   const [userInfo, setUserInfo] = useState([]);
 
   useEffect(() => {
+    scrollToTop();
     let userId = window.location.pathname.split("/")[2];
 
     const indexedDb =

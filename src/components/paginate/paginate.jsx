@@ -6,8 +6,8 @@ import { scrollToTop } from "../../utils/helper";
 //icons
 import { ReactComponent as NextIcon } from "../../assets/icons/next.svg";
 
-export default function Paginate({ pageCount, changeData }) {
-  const [currentPage, setCurrentPage] = useState(1);
+export default function Paginate({ pageCount, changeData, perPage }) {
+  const [currentPage, setCurrentPage] = useState(0);
 
   const indexedDb =
     window.indexedDB ||
@@ -16,27 +16,30 @@ export default function Paginate({ pageCount, changeData }) {
     window.msIndexedDB;
 
   var db = null;
-  var request = indexedDb.open("users", 1);
+
+  var request = indexedDb.open("usersDB", 1);
   request.onerror = function (event) {
     console.log("Error opening database");
   };
   request.onsuccess = function (event) {
     db = event.target.result;
   };
+
   var counter = 0;
-  var limit = 10;
+  var limit = perPage;
 
   const handlePageClick = (event) => {
-    setCurrentPage(Math.round(event.selected));
-    scrollToTop();
-    nextPage(Math.round(event.selected));
+    // setCurrentPage(event.selected);
+    setCurrentPage(Math.ceil(event.selected));
+    nextPage(event.selected);
   };
 
   const nextPage = (pageNo) => {
     var advanced = false;
+    var nextPageArr = [];
     db
-      .transaction("users", "readwrite")
-      .objectStore("users")
+      .transaction("usersDB", "readwrite")
+      .objectStore("usersDB")
       .openCursor().onsuccess = function (event) {
       var cursor = event.target.result;
 
@@ -46,22 +49,25 @@ export default function Paginate({ pageCount, changeData }) {
 
       if (!advanced) {
         advanced = true;
-        cursor.advance((pageNo + 1) * limit);
+        console.log(pageNo);
+        if (pageNo > 0) {
+          cursor.advance(pageNo * limit);
+        }
         return;
       }
 
-      // var value = cursor.value;
-
       if (cursor) {
         var value = cursor.value;
-        console.log(value)
+        console.log(value);
+        nextPageArr.push(value);
+
         counter++;
         if (counter < limit) {
           cursor.continue();
+        } else {
+          changeData(nextPageArr);
         }
       }
-
-      // ...
     };
   };
 

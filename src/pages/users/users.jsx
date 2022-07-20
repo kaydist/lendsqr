@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import "./_user.scss";
 import InAppLayout from "../../layout/inAppLayout";
 import { openDropdown } from "../../utils/dropdown";
@@ -44,6 +44,7 @@ export default function Users() {
     currentPage,
     setCurrentPage,
     totalCount,
+    setTotalCount,
   } = useContext(UsersListContext);
 
   const initialFilterState = {
@@ -63,7 +64,7 @@ export default function Users() {
     window.webkitIndexedDB ||
     window.msIndexedDB;
 
-  useEffect(() => {
+  useMemo(() => {
     const request = indexedDb.open("usersDB", 1);
 
     request.onerror = function (event) {
@@ -103,24 +104,34 @@ export default function Users() {
       });
 
       var counter = 0;
-      db.transaction("usersDB").objectStore("usersDB").openCursor().onsuccess =
-        function (event) {
-          var cursor = event.target.result;
-          if (cursor) {
-            var value = cursor.value;
-            setUsersList((prevState) => [...prevState, value]);
-            counter++;
-            if (counter < perPage) {
-              cursor.continue();
-            }
+      const arr = [];
+      let dataDB = db.transaction("usersDB").objectStore("usersDB");
+
+      dataDB.openCursor().onsuccess = function (event) {
+        var cursor = event.target.result;
+        if (cursor) {
+          var value = cursor.value;
+          arr.push(value);
+          counter++;
+          if (counter < perPage) {
+            cursor.continue();
+          } else {
+            setUsersList(arr);
           }
-        };
+        }
+      };
+
+      var countRequest = dataDB.count();
+      countRequest.onsuccess = function () {
+        var count = countRequest.result;
+        setTotalCount(count);
+      };
 
       transaction.oncomplete = function (event) {
         db.close();
       };
     };
-  }, []);
+  }, [perPage]);
 
   const gotoUserDetails = (user) => {
     navigate(`/users/${user}`, { replace: true });
@@ -159,9 +170,11 @@ export default function Users() {
       const transaction = db.transaction("usersDB", "readwrite");
       const objectStore = transaction.objectStore("usersDB");
       const cursorRequest = objectStore.openCursor();
+      var filterResult = [];
 
       cursorRequest.onsuccess = (e) => {
         const cursor = e.target.result;
+
         if (cursor) {
           const user = cursor.value;
           if (
@@ -179,10 +192,19 @@ export default function Users() {
             user.status.toLowerCase().includes(filter.status.toLowerCase())
           ) {
             const response = cursor.value;
-            setUsersList((prevState) => [...prevState, response]);
+            filterResult.push(response);
           }
-          cursor.continue();
         }
+        if (cursor !== null) {
+          cursor.continue();
+        } else {
+          setUsersList(filterResult);
+          setTotalCount(filterResult.length);
+        }
+      };
+
+      transaction.oncomplete = function (event) {
+        db.close();
       };
     };
   };
@@ -205,7 +227,7 @@ export default function Users() {
 
         <div className="analytics-card-row">
           {[
-            { icon: <UserIcon />, label: "usersDB", value: "2,453" },
+            { icon: <UserIcon />, label: "users", value: "2,453" },
             { icon: <ActiveUserIcon />, label: "Active Users", value: "2,453" },
             {
               icon: <UsersWithLoanIcon />,
@@ -238,8 +260,7 @@ export default function Users() {
             totalCount,
           }}
           changeData={(data) => {
-            console.log(data);
-            // setUsersList(data);
+            setUsersList(data);
           }}
         >
           <TableHeading
@@ -332,72 +353,70 @@ export default function Users() {
           </DropdownMenu>
 
           <TableBody>
-            {usersList
-              .filter((user, idx) => idx < perPage)
-              .map((user) => {
-                return (
-                  <TableRow key={user?.id}>
-                    <td className="org-col">{user?.orgName}</td>
-                    <td className="name-col">{user?.userName}</td>
-                    <td className="email-col">{user?.email}</td>
-                    <td className="phone-col">{user?.phoneNumber}</td>
-                    <td className="created-col">{user?.createdAt}</td>
-                    <td className="status-col">
-                      <span
-                        className={`status-label ${
-                          user?.status === "active"
-                            ? "active"
-                            : user?.status === "inactive"
-                            ? "inactive"
-                            : user?.status === "blacklisted"
-                            ? "blacklisted"
-                            : user?.status === "pending"
-                            ? "pending"
-                            : ``
-                        }`}
-                      >
-                        {user?.status}
-                      </span>
-                    </td>
-                    <td className="actions-col">
-                      <button
+            {usersList.map((user) => {
+              return (
+                <TableRow key={user?.id}>
+                  <td className="org-col">{user?.orgName}</td>
+                  <td className="name-col">{user?.userName}</td>
+                  <td className="email-col">{user?.email}</td>
+                  <td className="phone-col">{user?.phoneNumber}</td>
+                  <td className="created-col">{user?.createdAt}</td>
+                  <td className="status-col">
+                    <span
+                      className={`status-label ${
+                        user?.status === "active"
+                          ? "active"
+                          : user?.status === "inactive"
+                          ? "inactive"
+                          : user?.status === "blacklisted"
+                          ? "blacklisted"
+                          : user?.status === "pending"
+                          ? "pending"
+                          : ``
+                      }`}
+                    >
+                      {user?.status}
+                    </span>
+                  </td>
+                  <td className="actions-col">
+                    <button
+                      onClick={() => {
+                        openDropdown(`.more-option-menu-${user?.id}`);
+                      }}
+                    >
+                      <MoreIcon />
+                    </button>
+
+                    <DropdownMenu className={`more-option-menu-${user?.id}`}>
+                      <DropdownOption
                         onClick={() => {
-                          openDropdown(`.more-option-menu-${user?.id}`);
+                          gotoUserDetails(user?.id);
                         }}
                       >
-                        <MoreIcon />
-                      </button>
+                        <span className="icon">
+                          <ViewDetailsIcon />
+                        </span>
+                        View Details
+                      </DropdownOption>
 
-                      <DropdownMenu className={`more-option-menu-${user?.id}`}>
-                        <DropdownOption
-                          onClick={() => {
-                            gotoUserDetails(user?.id);
-                          }}
-                        >
-                          <span className="icon">
-                            <ViewDetailsIcon />
-                          </span>
-                          View Details
-                        </DropdownOption>
+                      <DropdownOption>
+                        <span className="icon">
+                          <BlacklistUserIcon />
+                        </span>{" "}
+                        Blacklist User
+                      </DropdownOption>
 
-                        <DropdownOption>
-                          <span className="icon">
-                            <BlacklistUserIcon />
-                          </span>{" "}
-                          Blacklist User
-                        </DropdownOption>
-
-                        <DropdownOption>
-                          <span className="icon">
-                            <ActivateUserIcon />
-                          </span>
-                          Activate User
-                        </DropdownOption>
-                      </DropdownMenu>
-                    </td>
-                  </TableRow>
-                );
-              })}
+                      <DropdownOption>
+                        <span className="icon">
+                          <ActivateUserIcon />
+                        </span>
+                        Activate User
+                      </DropdownOption>
+                    </DropdownMenu>
+                  </td>
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>

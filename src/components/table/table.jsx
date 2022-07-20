@@ -11,7 +11,7 @@ const Table = ({ children, tableProps, changeData, ...rest }) => {
 
   const handlePerPageChange = (val) => {
     if (val) {
-      setPerPage(val);
+      setPerPage(val.value);
     }
   };
   return (
@@ -22,7 +22,11 @@ const Table = ({ children, tableProps, changeData, ...rest }) => {
 
       <div className="table-selection-details">
         <div className="pageination-container">
-          <Paginate changeData={changeData} pageCount={Math.ceil(totalCount / perPage)} />
+          <Paginate
+            changeData={changeData}
+            perPage={perPage}
+            pageCount={Math.ceil(totalCount / perPage)}
+          />
         </div>
 
         <div className="current-count">
@@ -36,7 +40,7 @@ const Table = ({ children, tableProps, changeData, ...rest }) => {
               }}
             />
           </span>{" "}
-          out of 100
+          out of {totalCount}
         </div>
       </div>
     </div>
